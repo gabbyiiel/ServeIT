@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;700&display=swap");
+/* Fonts */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  color: white;
+}
+
+body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-image: url("../img/loginpagebg-min.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #351117;
+}
+
+.form-control {
+  background: transparent;
+  border-radius: 5px;
+  color: white;
+}
+
+.form-control option {
+  color: black;
+}
+
+#CreateText p {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.signup_form {
+  background-color: #351117;
+  border-radius: 5px;
+}
+.card {
+  background-color: #351117;
+  border-radius: 5px;
+  border: none;
+}
+.select {
+  background-color: none;
+}
+.select option {
+  background-color: none;
+}
+.form-control {
+  color: white !important;
+  background-color: transparent !important;
+}
+.form-check {
+  border: 1px solid rgba(0, 0, 0, 0.308);
+  border-radius: 5px;
+}
+
+.btn,
+.btn-primary {
+  font-weight: 700;
+  width: 352px;
+  height: 43px;
+  color: #711a28;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  background: transparent;
+  background-color: #ffc163;
+  font-size: 18px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.15px;
+}

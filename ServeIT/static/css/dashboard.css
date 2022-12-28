@@ -1,0 +1,21 @@
+.datetime {
+  padding: 30px;
+  border-radius: 25px;
+  background-color: rgba(255, 228, 196, 0.404);
+}
+.date {
+  font-size: 2rem;
+}
+.time {
+  font-size: 1.2rem;
+}
+
+.request_header {
+  padding: 30px;
+  border-radius: 25px;
+  background-color: rgba(66, 61, 49, 0.644);
+}
+.sidebar {
+  border-radius: 25px;
+  background-color: rgba(43, 2, 2, 0.404);
+}

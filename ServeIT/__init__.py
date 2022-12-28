@@ -1,5 +1,5 @@
 from flask import Flask
-from config import DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS, SECRET_KEY
+from config import DB_HOST, DB_NAME, DB_USER, DB_PASS, SECRET_KEY
 from flask_mysql_connector import MySQL
 
 mysql = MySQL()
@@ -18,7 +18,7 @@ def create_app(test_app=None):
     )
 
     #import blueprints
-    from .auth import auth
+    from .auth import bp_auth
     #register blueprints
-    app.register_blueprint(auth)
+    app.register_blueprint(bp_auth)
     return app

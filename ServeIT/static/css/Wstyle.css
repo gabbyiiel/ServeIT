@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@700&family=Lexend:wght@400;500&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Lexend", sans-serif;
+  font-style: normal;
+  font-display: swap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+h1 {
+  font-family: "CMG Sans BoldRounded";
+}
+p {
+  font-family: "CMG Sans Medium";
+  margin: 0;
+  font-size: 20px;
+}
+body {
+  background-image: url("../img/homepagebg.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.u-fixed,
+.c-fixed {
+  position: fixed;
+}
+.u-block,
+.c-block {
+  display: block;
+}
+.u-pad-a-md {
+  padding: 15px;
+}
+
+.c-logo {
+  width: 220px;
+  top: 50%;
+  left: 0;
+  background-color: #6d0a03;
+}
+
+.sd {
+  width: 180px;
+  height: auto;
+}
+.sdi {
+  width: 75px;
+  height: auto;
+  padding-left: 15px;
+}
+
+.c-menu {
+  width: 120px;
+  background: #6d0a03;
+  position: fixed;
+  top: 50%;
+  right: 0;
+}
