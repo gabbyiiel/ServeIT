@@ -5,16 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ServeIT</title>
-    <!-- font awesome link -->
-    <script
-      src="https://kit.fontawesome.com/091b62d549.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- SwiperLink -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
-    />
     <!-- Bootstrap  -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -27,37 +17,82 @@
       rel="stylesheet"
       href="{{url_for('static', filename='css/Wstyle.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/Wlanding.css') }}"
+    />
   </head>
   <!--  -->
+
   <body>
     <!-- navbar -->
     {% include 'Wnavbar.html' %} {% block content %}
     <div class="container">
+      <!-- printing service -->
+      <div id="service-1" class="service">
+        <img src={{url_for('static', filename='img/logo/printing_logo.png')}}
+        alt="Printing service" />
+        <div>
+          <h2>Printing Services</h2>
+          <p>Allows users to place their print order online.</p>
+        </div>
+      </div>
+      <!-- food delivery service -->
+      <div id="service-2" class="service">
+        <img src={{url_for('static', filename='img/logo/fds_logo.png')}} />
+        <div>
+          <h2>Food Delivery Services</h2>
+          <p>Allows users to place their food order online.</p>
+        </div>
+      </div>
+      <!-- Gcash Transaction service -->
+      <div id="service-3" class="service">
+        <img src={{url_for('static', filename='img/logo/gcash_logo.png')}}
+        alt="gcash transaction service" />
+        <div>
+          <h2>Gcash Transaction</h2>
+          <p>
+            Allows users to place their GCash cash-in/ cash-out transaction
+            order online.
+          </p>
+        </div>
+      </div>
+      <!-- Tutorial Appointment service -->
+      <div id="service-4" class="service">
+        <img src={{url_for('static', filename='img/logo/ta_logo.png')}}
+        alt="tutorial appointment service" />
+        <div>
+          <h2>Tutorial appointment</h2>
+          <p>
+            Allows users to set tutorial appointment from the Guidance Office.
+          </p>
+        </div>
+      </div>
+      <!-- LOGO LEFT -->
       <a
         class="u-block c-link u-fixed c-logo u-pad-a-md is-active"
         href="/"
         style="z-index: 99999"
       >
         <img class="sd u-inline-block u-valign-middle u-fit-w"
-        src={{url_for('static', filename='img/logo/SD_whitelogo.png')}}></a
+        src={{url_for('static', filename='img/logo/SDW_logo.png')}}></a
       >
+      <!-- LOGO RIGHT -->
+      <a
+        href="/login"
+        aria-controls="menu"
+        aria-expanded="true"
+        aria-label="Open menu"
+        class="c-block c-menu c-fixed u-pad-a-md"
+        style="z-index: 99999"
+      >
+        <img class="sdi" src={{url_for('static',
+        filename='img/logo/SD_icon.png')}}>
+        <!-- sign up and login box -->
+      </a>
     </div>
-    <a
-      aria-controls="menu"
-      aria-expanded="true"
-      aria-label="Open menu"
-      class="c-block c-menu c-fixed u-pad-a-md"
-      style="z-index: 99999"
-    >
-      <img class="sdi" src={{url_for('static',
-      filename='img/icons/SD_icon.png')}}>
-    </a>
 
-    <!-- script for date & time dashboard -->
-    <script
-      src="{{url_for('static', filename='js/time_date.js') }}"
-      defer
-    ></script>
+    <script></script>
 
     {% endblock %}
   </body>

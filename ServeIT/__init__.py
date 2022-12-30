@@ -19,6 +19,8 @@ def create_app(test_app=None):
 
     #import blueprints
     from .auth import bp_auth
+    from .dashboard import db_user
     #register blueprints
     app.register_blueprint(bp_auth)
+    app.register_blueprint(db_user)
     return app

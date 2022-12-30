@@ -1,0 +1,125 @@
+/* Fonts */
+/* CMG Sans Bold */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@700&family=Lexend:wght@400;500&display=swap");
+/* Fonts */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Lexend", sans-serif;
+  font-style: normal;
+  font-display: swap;
+  color: white;
+}
+body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-image: url("../img/backgrounds/loginpagebg-min.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #351117;
+}
+.whitelogo {
+  margin-bottom: 50px;
+  width: auto;
+  height: 150px;
+  background: transparent;
+}
+
+.login_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.login_form_input {
+  border: 2px solid #ffdfad;
+  border-radius: 26px;
+  background: rgba(217, 217, 217, 0.137);
+  width: 352px;
+  height: 43px;
+  left: 544px;
+  top: 484px;
+  margin: 4px 0;
+  padding-left: 25px;
+  font-size: 16px;
+  letter-spacing: 0.15px;
+}
+
+.login_form_button {
+  font-weight: 700;
+  color: #711a28;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  background: transparent;
+  background-color: #ffc163;
+  width: 352px;
+  height: 43px;
+  left: 544px;
+  top: 583px;
+  margin: 4px 0;
+
+  font-size: 18px;
+  letter-spacing: 0.15px;
+}
+.signup_text {
+  color: white;
+  margin-top: 20px;
+  background: transparent;
+  font-size: 20px;
+}
+.signup_text a {
+  color: #ffc163;
+  font-weight: 500;
+  background: transparent;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#flash-message {
+  color: #131313;
+}
