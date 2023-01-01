@@ -1,4 +1,3 @@
-
 const dateElement = document.querySelector(".date");
 const greetingElement = document.querySelector(".greeting");
 const nth = function(d) {
@@ -10,6 +9,7 @@ const nth = function(d) {
     default: return "th";
   }
 }
+const ordinal = nth(date);
 /**
  * @param {Date} date
  */
@@ -43,18 +43,18 @@ function formatDate(date) {
     "December"
   ];
 
-  return `${DAYS[date.getDay()]}, ${MONTHS[date.getMonth()]} ${date.getDate()}${nth(date.getDate)}`;
+  return `${DAYS[date.getDay()]}, ${MONTHS[date.getMonth()]} ${date.getDate()}${ordinal(date.getDate())}`;
 }
 function getGreeting() {
   const now = new Date();
   const hours = now.getHours();
-
+  
   if (hours < 12) {
-    return "Good morning,";
+    return "Good morning, " + userFirstName;
   } else if (hours < 18) {
-    return "Good afternoon,";
+    return "Good afternoon," + userFirstName;
   } else {
-    return "Good evening,";
+    return "Good evening," + userFirstName;
   }
 }
 
@@ -68,3 +68,5 @@ setInterval(() => {
 setInterval(() => {
   greetingElement.textContent = getGreeting();
 }, 200);
+
+

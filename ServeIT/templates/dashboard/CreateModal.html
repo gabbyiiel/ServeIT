@@ -1,0 +1,88 @@
+<div class="modal fade in" id="CreateModal">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px">
+    <div class="modal-content" style="border: 0">
+      <div class="modal-header">
+        <h5 class="modal-title">Select services you want to request</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row m-2">
+            <a
+              class="col m-2 card print-card border-0 justify-content-center mt-2"
+              data-bs-toggle="modal"
+              data-bs-target="#PRINT"
+              data-backdrop="false"
+              style="cursor: pointer"
+            >
+              <div class="row m_icons justify-content-center mt-2">
+                <img src={{url_for('static',
+                filename='img/logo/printing_logo.png')}} alt="tr-icon">
+              </div>
+              <div class="row text-center m_text mt-2 mb-2">
+                <h6>Printing Service</h6>
+              </div>
+            </a>
+            <a
+              class="col m-2 card fds-card border-0 justify-content-center"
+              data-bs-toggle="modal"
+              data-bs-target="#FDS"
+              data-backdrop="false"
+              style="cursor: pointer"
+            >
+              <div class="row m_icons justify-content-center mt-2">
+                <img src={{url_for('static', filename='img/logo/fds_logo.png')}}
+                alt="tr-icon">
+              </div>
+              <div class="row text-center m_text mt-2 mb-2">
+                <h6>Food Delivery Service</h6>
+              </div>
+            </a>
+            <a
+              class="col m-2 card gc-card border-0 justify-content-center"
+              data-bs-toggle="modal"
+              data-bs-target="#Gcash"
+              data-backdrop="false"
+              style="cursor: pointer"
+            >
+              <div class="row m_icons justify-content-center mt-2">
+                <img src={{url_for('static',
+                filename='img/logo/gcash_logo.png')}} alt="tr-icon">
+              </div>
+              <div class="row text-center m_text mt-2 mb-2">
+                <h6>Gcash</h6>
+              </div>
+            </a>
+            <a
+              class="col m-2 card ta-card border-0 justify-content-center"
+              data-bs-toggle="modal"
+              data-bs-target="#TA"
+              data-backdrop="false"
+              style="cursor: pointer"
+            >
+              <div class="row m_icons justify-content-center mt-2">
+                <img src={{url_for('static', filename='img/logo/ta_logo.png')}}
+                alt="tr-icon">
+              </div>
+              <div class="row text-center m_text mt-2 mb-2">
+                <h6>Tutorial Appointment</h6>
+              </div>
+            </a>
+            <div class="row">
+              description diri pag mo hover kay mo change ang description
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'dashboard/S_gcashModal.html' %} {% include
+'dashboard/S_taModal.html' %} {% include 'dashboard/S_fdsModal.html' %} {%
+include 'dashboard/S_printModal.html' %}

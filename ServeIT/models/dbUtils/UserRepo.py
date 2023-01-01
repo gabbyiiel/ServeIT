@@ -65,7 +65,11 @@ class UserRepo:
                 }
 
     @staticmethod
-    def get_fname ():
+    def get_fname(username):
         cur = mysql.connection.cursor()
-        cur.execute("SELECT fname FROM users WHERE id = 1")
-        return cur.fetchone()[0]
+        cur.execute("SELECT fname FROM users WHERE username = %s", (username,))
+        result = cur.fetchone()
+        if result:
+            return result[0]
+        else:
+            return None
