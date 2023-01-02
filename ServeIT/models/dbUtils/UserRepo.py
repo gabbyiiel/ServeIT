@@ -82,6 +82,4 @@ class UserRepo:
         else:
             return None
 
-    @staticmethod
-    def user_Photo(user_id, file):
-    
+

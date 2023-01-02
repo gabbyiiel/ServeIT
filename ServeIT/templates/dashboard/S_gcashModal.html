@@ -1,37 +1,46 @@
-<div class="modal fade in" id="Gcash">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+<div class="modal fade in" id="GCASH">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 750px">
+    <div class="modal-content" style="border: 0;">
       <div class="modal-header">
-        <h5 class="modal-title">Gcash</h5>
+        <a data-bs-toggle="modal" data-bs-target="#CreateModal" data-backdrop="false" style="cursor: pointer"> 
+          <img class="back-icon me-3 " src={{url_for('static',
+          filename='img/icons/Y_back.png')}} alt="return-icon">         
+        </a>
+        <h5 class="modal-title mb-0">Gcash Transaction</h5>
         <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+        >
+        </button> 
+        </div>
+      
       <div class="modal-body">
         <div class="container-fluid">
           <div class="row">
-            <div class="col card">
-              <button
-                class="btn btn-primary"
-                data-bs-target="#exampleModalToggle2"
-                data-bs-toggle="modal"
-              ></button>
+            <div class="col m_icons justify-content-center align-items-center m-2">
+                <img src={{url_for('static',
+                filename='img/logo/gcash_logo.png')}} alt="tr-icon">
             </div>
-
-            <div class="col card">FDS</div>
-            <div class="col card">Gcash</div>
-            <div class="col card">TA</div>
+            <div class="col m-2 align-items-center">
+              <div class="row m-1">
+                <button type="button" class="btn btn-light">Gcash Cash-in</button>
+              </div>
+              <div class="row m-1">
+                <button type="button" class="btn btn-light">Gcash Cash-out</button>
+              </div>
+              <div class="row m-1">
+                <button type="button" class="btn btn-light">Other</button>
+              </div>
+            
+            </div>
+            
+            
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        
       </div>
     </div>
   </div>

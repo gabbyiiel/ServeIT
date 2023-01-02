@@ -1,6 +1,6 @@
 <div class="modal fade in" id="PRINT">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" style="border: 0">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 950px;">
+    <div class="modal-content" style="border: 0;">
       <div class="modal-header">
         <a data-bs-toggle="modal" data-bs-target="#CreateModal" data-backdrop="false" style="cursor: pointer"> 
           <img class="back-icon me-3 " src={{url_for('static',
@@ -17,35 +17,40 @@
         </div>
       
       <div class="modal-body">
-        <div class="container-fluid">
-          <div class="row">
-            <a
-              class="col m-2 card border-0 mt-2"
-              id="print-card"
-              data-bs-toggle="modal"
-              data-bs-target="#PRINT"
-              data-backdrop="false"
-              style="cursor: pointer"
-            >
-              <div class="row m_icons m-2">
-                <img src={{url_for('static',
-                filename='img/logo/printing_logo.png')}} alt="tr-icon">
-              </div>
+        <div class="container">
+          <div class="row print-modal">
+            <div class="col-6 m_icons justify-content-center align-items-center">
+                <img class="ms-5" src={{url_for('static',
+                filename='img/logo/printing_logo.png')}} alt="print_logo">
+            </div>
+            <div class="col-6">
+              <div class="row justify-content-center align-items-center">
+                <form action="{{ url_for('db_user.add_request') }}" id="" method="POST" enctype="multipart/form-data">
+                  {{ form.hidden_tag() }}
+                  <div class="col-5">
+                    {{form.printfile(class_='form-modal-control')}}
+                  </div>
+                  <div class="col-5">
+                    {{form.num_copies(class_='form-modal-control', placeholder='Number of Copies')}}
+                  </div>
+                  </div>
+                  <div class="row p-2">
+                    {{form.specification(class_='form-modal-control', placeholder='  Specification')}}
+                  </div>
+                </form>
+            </div>
+          
             
-              </div>
-            </a>
+          </div>
+          <div class="row mt-3 justify-content-center align-items-center">
+            {{form.submit(class_='form-modal-btn')}}    
+          </div>
+            
+            
           </div>
         </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+      </div>
+        
       </div>
     </div>
   </div>
