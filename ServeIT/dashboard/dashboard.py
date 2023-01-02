@@ -1,8 +1,8 @@
 from flask import render_template, request, flash, redirect, session
-from . import db_user
+from . import bp_user_db
 from ServeIT.models.dbUtils.UserRepo import UserRepo
 
-@db_user.route('/dashboard')
+@bp_user_db.route('/dashboard')
 def dashboard():
     if "username" in session:
         username = session["username"]

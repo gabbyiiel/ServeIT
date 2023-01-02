@@ -1,4 +1,3 @@
-/* Google Font Link */
 @import url("https://fonts.googleapis.com/css2?family=Jost:wght@700&family=Lexend:wght@400;500&family=Mitr:wght@400;500;600&display=swap");
 * {
   margin: 0;
@@ -261,106 +260,13 @@ header {
   color: #face7f !important;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.75);
 }
-.datetime {
-  border-radius: 25px;
-  background-color: #fffdf9;
-  box-shadow: rgba(0, 0, 0, 0.253) 0px 3px 10px;
-}
 
-.date {
-  font-family: "Mitr", sans-serif;
-  font-size: 2rem;
-  text-shadow: rgba(0, 0, 0, 0.253) 0px 1px 2px;
-  font-weight: 700;
-  color: #6d0a03;
-}
-.greeting {
-  font-family: "Mitr", sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  text-shadow: rgba(0, 0, 0, 0.253) 0px 1px 2px;
-  color: #424242;
-}
-
-.request_lists {
-  border-radius: 25px;
-  background-color: rgba(66, 61, 49, 0.644);
-}
-#sd_icon3d {
-  width: 180px;
-  height: auto;
-}
-
-.card.TR-card {
-  border-radius: 15px;
-  background-color: #fffdf9;
-  box-shadow: rgba(0, 0, 0, 0.253) 0px 2px 5px;
-}
-.CR-card {
-  box-shadow: rgba(0, 0, 0, 0.253) 0px 2px 5px;
-}
-
-.TR-icon img,
-.CR-icon img {
-  width: 50px;
-  height: auto;
-}
-@media (max-width: 420px) {
-  .sidebar li .tooltip {
-    display: none;
-  }
-}
-
-.modal-backdrop {
-  display: none;
-}
-
-.card.CR-card {
-  background: #6d0a03;
+.user-profile-header {
+  background-color: #face7f;
   border-radius: 15px;
 }
 
-.card.CR-card h3 {
-  color: #face7f;
-  margin: 0;
-}
-
-.m_icons img {
-  width: 150px;
-  height: auto;
-}
-
-.m_text h6 {
-  font-family: "Mitr", sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-}
-
-.modal-header {
-  background-color: #6d0a03;
-  color: #face7f;
-}
-
-#fds-card,
-#print-card,
-#gc-card,
-#ta-card {
-  background-color: #fff7e7;
-  color: #424242;
-  text-decoration: none;
-}
-
-.gc-card:hover,
-.ta-card:hover,
-.fds-card:hover,
-.print-card:hover {
-  transform: scale(1.1);
-  transition: 0.2s ease;
-  color: #424242;
-}
-
-.back-icon {
-  width: 40px;
+.edit-pic-icon {
+  width: 20px;
   height: auto;
 }

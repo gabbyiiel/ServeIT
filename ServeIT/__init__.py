@@ -1,6 +1,9 @@
 from flask import Flask
 from config import DB_HOST, DB_NAME, DB_USER, DB_PASS, SECRET_KEY
+from config import CLOUD_NAME, API_KEY, API_SECRET
 from flask_mysql_connector import MySQL
+import cloudinary
+import cloudinary.uploader
 
 mysql = MySQL()
 
@@ -16,11 +19,19 @@ def create_app(test_app=None):
         MYSQL_USER = DB_USER,
         MYSQL_PASSWORD = DB_PASS,
     )
+    cloudinary.config(
+        cloud_name = CLOUD_NAME,
+        api_key = API_KEY,
+        api_secret = API_SECRET,
+        secure = 'true'
+    )
 
     #import blueprints
     from .auth import bp_auth
-    from .dashboard import db_user
+    from .dashboard import bp_user_db
+    from .account import bp_acc
     #register blueprints
     app.register_blueprint(bp_auth)
-    app.register_blueprint(db_user)
+    app.register_blueprint(bp_user_db)
+    app.register_blueprint(bp_acc)
     return app

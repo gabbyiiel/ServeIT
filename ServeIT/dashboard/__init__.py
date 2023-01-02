@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-db_user = Blueprint('db_user', __name__)
+bp_user_db = Blueprint('db_user', __name__)
 
 from . import dashboard

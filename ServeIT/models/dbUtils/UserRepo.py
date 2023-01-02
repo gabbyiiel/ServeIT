@@ -32,12 +32,10 @@ class UserRepo:
         # validate email
         if not re.match(r'^[\w.-]+@[\w.-]+(\.[\w.-]+)+$', email):
             return {'code': -1, 'message': 'Email is already taken'}
-
         # validate password
         if not re.match(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$', password):
             return {'code': -1, 'message': 'The password must be at least 8 characters long and can contain only letters, digits and special characters'}
-
-        # check if username is already taken
+        # check if username is already taken    
         cur.execute(f'SELECT * FROM users WHERE username = "{username}"')
         user = cur.fetchone()
         if user is not None:
@@ -73,3 +71,17 @@ class UserRepo:
             return result[0]
         else:
             return None
+
+    @staticmethod
+    def get_username(username):
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT username FROM users WHERE username = %s", (username,))
+        result = cur.fetchone()
+        if result:
+            return result[0]
+        else:
+            return None
+
+    @staticmethod
+    def user_Photo(user_id, file):
+    

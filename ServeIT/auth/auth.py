@@ -8,18 +8,6 @@ from .forms.userforms import LoginForm, SignupForm
 def index():
     return render_template("home/test.html")
 
-
-
-@bp_auth.route('/userprofile')
-def userprofile():
-    if "username" in session:
-        username = session["username"]
-        title = 'Profile'
-        return render_template("users/userprofile.html", title=title)
-    else:
-        return redirect('/login')
-
-
 @bp_auth.route('/about')
 def ap_index():
     title = 'About'
@@ -45,6 +33,7 @@ def login():
           flash(result['message'])
           return render_template("login/login.html", form=form, title=title)
         else:
+          
           session['logged_in'] = True
           session['username'] = username
           return redirect('dashboard')
