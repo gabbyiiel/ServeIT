@@ -1,3 +1,4 @@
+
 <div class="modal fade in" id="PRINT">
   <div class="modal-dialog modal-dialog-centered" style="max-width: 950px;">
     <div class="modal-content" style="border: 0;">
@@ -23,36 +24,63 @@
                 <img class="ms-5" src={{url_for('static',
                 filename='img/logo/printing_logo.png')}} alt="print_logo">
             </div>
-            <div class="col-6">
-              <div class="row justify-content-center align-items-center">
-                <form action="{{ url_for('bp_dashboard.add_print_request') }}" method="POST" enctype="multipart/form-data">
-                  {{ form.hidden_tag() }}
-                  <div class="col-5">
-                    {{form.printfile(class_='form-modal-control')}}
+            <div class="col-6 mt-2">
+              <form action="{{ url_for('bp_dashboard.add_print_request') }}" method="POST" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="row justify-content-center align-items-center">
+                  <div class="col-6">
+                    {{ form.printfile(class_='form-control fileinput', id='file') }}
                   </div>
-                  <div class="col-5">
-                    {{form.num_copies(class_='form-modal-control', placeholder='Number of Copies')}}
+                  <div class="col-6">
+                    {{form.num_copies(class_='form-control numinput', placeholder='Number of Copies')}}
                   </div>
-                  </div>
-                  <div class="row p-2">
-                    {{form.specification(class_='form-modal-control', placeholder='  Specification')}}
-                  </div>
-                
-            </div>
-          
-            
+                </div>
+              <div class="row p-2">
+                {{form.specification(class_='form-control specinput', placeholder='Specification')}}
+              </div>
+            </div>  
+          </form>   
           </div>
           <div class="row mt-3 justify-content-center align-items-center">
-            {{form.submit(class_='form-modal-btn')}}    
+            <a data-bs-toggle="modal" data-bs-target="#PAYMENT" data-backdrop="false" id="open-request-modal" style="cursor: pointer;">
+            <div class="d-flex justify-content-center align-items-center m-3">
+              <div class="CR-info me-md-auto">
+                <h3>
+                  Payment?
+                </h3>  
+              </div>  
+            </a>
           </div>
-        </form>
+            
             
             
           </div>
         </div>
       </div>
-        
       </div>
     </div>
   </div>
 </div>
+{% include 'dashboard/S_paymentModal.html' %}
+<script>
+  $(document).ready(function() {
+  // Initialize steps
+  var steps = new Steps('#steps');
+
+  // Handle click on "Prev" button
+  $('#prev-btn').click(function() {
+    steps.prev();
+  });
+
+  // Handle click on "Next" button
+  $('#next-btn').click(function() {
+    steps.next();
+  });
+
+  // Update "Prev" button state
+  steps.on('stepchange', function() {
+    $('#prev-btn').prop('disabled', !steps.hasPrev());
+  });
+});
+
+</script>

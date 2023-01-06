@@ -1,5 +1,6 @@
 from flask import render_template, request, flash, redirect, session, url_for
 from . import bp_dashboard
+from ServeIT.auth.auth import login_required
 from ServeIT.models.dbUtils.UserRepo import UserRepo
 from ServeIT.models.dbUtils.ServicesRepo import Services
 from ServeIT.Services.forms.ServicesForm import ServicesForm
@@ -7,21 +8,25 @@ import cloudinary, cloudinary.uploader
 from cloudinary.uploader import upload
 
 @bp_dashboard.route('/dashboard')
+@login_required
 def dashboard():
-    if "username" in session:
-        username = session["username"]
-        title = 'Dashboard'
-        fname = UserRepo.get_fname(username)
-        form = ServicesForm()
-        if fname:
-            return render_template("dashboard/dashboard.html", title=title, fname=fname, form=form)
-        else:
-            return "Error: Could not retrieve user data"
+    userID = session.get('user_id')
+
+
+    title = 'Dashboard'
+    fname = UserRepo.get_fname(userID)
+    form = ServicesForm()
+    if fname:
+        return render_template("dashboard/dashboard.html", title=title, fname=fname, form=form)
     else:
-        return redirect('/login')
+        return "Error: Could not retrieve user data"
+
+    
+
 
 @bp_dashboard.route('/dashboard/add', methods=['GET', 'POST'])
 def add_print_request():
+    userID = session.get('user_id')
     if request.method == 'POST':
         form = ServicesForm()
         if form.validate_on_submit():
@@ -34,8 +39,7 @@ def add_print_request():
                 fileURL = uploadFile(printfile)
             service_name="PR"
             Services.add_service(service_name)
-            Services.add_printing(fileURL,num_copies,specification)
-
+            
             result = Services.add_printing(fileURL,num_copies,specification)
             if result is not None and result['code'] == -1:
                 flash(result['message'])

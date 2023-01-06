@@ -17,17 +17,34 @@ class UserRepo:
                     'code': -1,
                     'message': 'Invalid username or password'
                 }
-            print(user)
-            # login the user
-            # ...
+            user_id = user[0]
+            return {
+                'code': 0,
+                'user_id': user_id
+            }
         except Exception as e:
             return {
                 'code' : -1,
                 'message' : f'{e}'
             }
+
     @staticmethod
     def signup(username, idnumber, fname, lname, email, course, college, password, gender):
         cur = mysql.connection.cursor()
+        # Retrieve the maximum value of the user_id column
+        cur.execute("SELECT MAX(user_id) FROM users")
+        result = cur.fetchone()
+        max_user_id = result[0]
+
+        # Extract the number part from the maximum user_id and increment it by 1
+        if max_user_id:
+            number_part = int(max_user_id.split("SCSD")[1]) + 1
+        else:
+            # If the services table is empty, start the user_id from 1
+            number_part = 1
+
+        # Generate the new service code
+        user_id = "SDID" + str(number_part).zfill(4)
 
         # validate email
         if not re.match(r'^[\w.-]+@[\w.-]+(\.[\w.-]+)+$', email):
@@ -47,8 +64,8 @@ class UserRepo:
         if user is not None:
             return {'code': -1, 'message': 'Email is already taken'}
         try:
-            cur.execute(f''' INSERT INTO `users`(`userID`, `username`, `idnumber`, `fname`, `lname`, `email`, `college`, `course`, `password`, `gender`) VALUES
-                        ('','{username}','{idnumber}','{fname}','{lname}','{email}','{college}','{course}','{password}','{gender}')
+            cur.execute(f''' INSERT INTO `users`(`user_id`, `username`, `idnumber`, `fname`, `lname`, `email`, `college`, `course`, `password`, `gender`) VALUES
+                        ('{user_id}','{username}','{idnumber}','{fname}','{lname}','{email}','{college}','{course}','{password}','{gender}')
                         ''')
             mysql.connection.commit()
             return {
@@ -63,19 +80,9 @@ class UserRepo:
                 }
 
     @staticmethod
-    def get_fname(username):
+    def get_fname(userID):
         cur = mysql.connection.cursor()
-        cur.execute("SELECT fname FROM users WHERE username = %s", (username,))
-        result = cur.fetchone()
-        if result:
-            return result[0]
-        else:
-            return None
-
-    @staticmethod
-    def get_username(username):
-        cur = mysql.connection.cursor()
-        cur.execute("SELECT username FROM users WHERE username = %s", (username,))
+        cur.execute("SELECT fname FROM users WHERE user_id = %s", (userID,))
         result = cur.fetchone()
         if result:
             return result[0]

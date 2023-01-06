@@ -5,22 +5,29 @@ from ServeIT import mysql
 class Services:
     
     @staticmethod
-    def add_request(order_status, order_date, mode_of_payment):
+    def add_request(userID, order_status, mode_of_payment):       
+        service_code = Services.get_service_code()
         try:
             cur = mysql.connection.cursor()
-            cur.execute(f'SELECT * from users where userID = "{userID}"')
+            # Retrieve the maximum value of the request_id column
+            cur.execute("SELECT MAX(request_id) FROM request_id")
             result = cur.fetchone()
-            if result is not None:
-                userID = result[0]
+            max_request_code = result[0]
+            # Extract the number part from the maximum request code
+            # and increment it by 1
+            if max_request_code:
+                number_part = int(max_request_code.split("SDRQID")[1]) + 1
             else:
-                return {
-                    'code': -1,
-                    'message': 'User not found'
-                }
+                # If the request table is empty, start the request code from 1
+                number_part = 1
+            # Generate the new request id code
+            request_id = "SDRQID" + str(number_part).zfill(4)
+
             cur.execute(f''' INSERT INTO `requests`
-                        (`request_id`, `userID`, `service_id`, `order_status`, `order_date`, `mode_of_payement`)
-                        VALUES ('', '{userID}', '', '{order_status}', '{order_date}', '{mode_of_payment}')''')
+                        (`request_id`, `user_id`, `service_code`, `order_status`, `order_date`, `mode_of_payement`)
+                        VALUES ('{request_id}', '{userID}', '{service_code}', '{order_status}', NOW(), '{mode_of_payment}')''')
             mysql.connection.commit()
+            print("REQUEST ADDED")
             return {
                 'code': 1,
                 'message': 'Request Added'
@@ -32,16 +39,26 @@ class Services:
                     'message': f'{e}'
                 }
 
+    @staticmethod
+    def get_service_code():
+        cur = mysql.connection.cursor()
+        query = f"SELECT MAX(service_code) FROM services"
+        cur.execute(query)
+        result = cur.fetchone()
+        if result[0] is None:
+            return 0
+        return result[0]
 
     @staticmethod
     def add_printing(fileURL, num_copies, specification):
+        service_code = Services.get_service_code_name("SFPR")
         try:
             cur = mysql.connection.cursor()
             cur.execute(f''' INSERT INTO `s_print`
                         (`print_id`, `service_code`,`file`, `number_of_copies`, `specification` ) 
-                        VALUES ('','', '{fileURL}', '{num_copies}', '{specification}')''')
+                        VALUES ('','{service_code}', '{fileURL}', '{num_copies}', '{specification}')''')
             mysql.connection.commit()
-            print("success")
+            print("Print Service Added")
             return {
                 'code': 1,
                 'message': 'Printing Request Added'
@@ -52,7 +69,7 @@ class Services:
                     'code': -1,
                     'message': f'{e}'
                 }
-    
+
     @staticmethod
     def add_service(service_name):
         try:
@@ -71,7 +88,7 @@ class Services:
                 number_part = 1
 
             # Generate the new service code
-            service_code = "SCSD" + str(number_part).zfill(4)
+            service_code = "SDSC" + str(number_part).zfill(4)
 
             # Generate the service_name
             service_name = f"SF{service_name}"
@@ -80,7 +97,6 @@ class Services:
                         (`service_code`, `service_name`)
                         VALUES ('{service_code}', '{service_name}')''')
             mysql.connection.commit()
-            print("SERVICES ADDED")
             return {
                 'code': 1,
                 'message': 'SERVICES Added' }
@@ -90,3 +106,12 @@ class Services:
                     'code': -1,
                     'message': f'{e}'
                 }
+    @staticmethod
+    def get_service_code_name(service_name):
+        cur = mysql.connection.cursor()
+        query = f"SELECT MAX(service_code) FROM services WHERE service_name = '{service_name}'"
+        cur.execute(query)
+        result = cur.fetchone()
+        if result[0] is None:
+            return 0
+        return result[0]

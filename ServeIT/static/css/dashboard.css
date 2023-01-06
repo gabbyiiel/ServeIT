@@ -366,7 +366,8 @@ header {
   height: auto;
 }
 
-.form-modal-control {
+.fileinput,
+.numinput {
   border-radius: 10px;
   padding: 5px;
   background-color: #fffefb;
@@ -375,6 +376,7 @@ header {
   color: #424242;
   cursor: pointer;
 }
+
 .print-modal {
   background-color: #fff7e7;
   border-radius: 15px;

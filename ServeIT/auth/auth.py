@@ -1,8 +1,18 @@
-from flask import render_template, request, flash, redirect, session
+from flask import render_template, request, flash, redirect, session, url_for
 from . import bp_auth
+import functools
 from ServeIT.models.dbUtils.UserRepo import UserRepo
 from .forms.userforms import LoginForm, SignupForm
 
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if not session.get('user_id'):
+            return redirect(url_for('bp_auth.login'))
+
+        return view(**kwargs)
+
+    return wrapped_view
 
 @bp_auth.route ('/')
 def index():
@@ -22,6 +32,8 @@ def sp_index():
 def login():
     title = 'Log In'
     form = LoginForm()
+    if session.get('user_id'):
+      return redirect('dashboard')
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data 
@@ -33,17 +45,15 @@ def login():
           flash(result['message'])
           return render_template("login/login.html", form=form, title=title)
         else:
-          
-          session['logged_in'] = True
-          session['username'] = username
+          print('Logged in User -', result['user_id'])
+          session['user_id'] = result['user_id']
+
           return redirect('dashboard')
     return render_template("login/login.html", form=form, title=title)
 
 @bp_auth.route('/logout')
 def logout():
-    session.pop('loggedin', None)
-    session.pop('id', None)
-    session.pop('username', None)
+    session.clear()
     return redirect('/')
 
 

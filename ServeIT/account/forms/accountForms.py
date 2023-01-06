@@ -2,12 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, FileField, validators, SelectField, RadioField
 from wtforms.validators import DataRequired, Email
 
-
-class UpdatePhoto(FlaskForm):
-    image = FileField("Image")
-    submit = SubmitField("Update")
-
-class UpdateForm(FlaskForm):
+class AccountForm(FlaskForm):
     fname = StringField("First Name", validators=[DataRequired()])
     lname = StringField("Last Name", validators=[DataRequired()])
     email = StringField("Email", validators=[DataRequired(), Email()])
@@ -17,4 +12,6 @@ class UpdateForm(FlaskForm):
     username = StringField('Username',validators=[validators.Length(min=4, max=25)])
     gender = RadioField('Gender', choices=[('male', 'Male'), ('female', 'Female')], render_kw={'class': 'form-check-input'}) 
     password = PasswordField('Password', validators=[validators.Length(min=8)])
+    submit = SubmitField("Update")
+    image = FileField("Image")
     submit = SubmitField("Update")

@@ -1,21 +1,23 @@
 from flask import render_template, request, flash, redirect, session, url_for
 from . import bp_acc
+from ServeIT.auth.auth import login_required
 from ServeIT.models.dbUtils.UserRepo import UserRepo
-from .forms.accountForms import UpdatePhoto, UpdateForm
+from .forms.accountForms import AccountForm
 import cloudinary, cloudinary.uploader
 
 @bp_acc.route("/account")
+@login_required
 def account():
-    if "username" in session:
-        username = session["username"]
-        title = 'Dashboard'
-        fname = UserRepo.get_fname(username)
-        if fname:
-            return render_template("account/account.html", title=title, fname=fname)
-        else:
-            return "Error: Could not retrieve user data"
+    form=AccountForm()
+    userID = session.get('user_id')
+
+    title = 'Dashboard'
+    fname = UserRepo.get_fname(userID)
+    if fname:
+        return render_template("account/account.html", title=title, form=form)
     else:
-        return redirect('/login')
+        return "Error: Could not retrieve user data"
+
 
 # Upload to Cloudinary
 def uploadImage(image):
