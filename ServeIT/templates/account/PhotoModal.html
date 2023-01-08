@@ -12,73 +12,47 @@
       </div>
       <div class="modal-body">
         <div class="container-fluid">
-          <div class="row m-2">
-            <a
-              class="col m-2 card print-card border-0 justify-content-center mt-2"
-              id="print-card"
-              data-bs-toggle="modal"
-              data-bs-target="#PRINT"
-              data-backdrop="false"
-              style="cursor: pointer"
-            >
-              <div class="row m_icons justify-content-center mt-2">
-                <img src={{url_for('static',
-                filename='img/logo/printing_logo.png')}} alt="tr-icon">
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="UserImgContainer">
+                  <img
+                    id="previewUserImg"
+                    class="img-fluid rounded mx-auto d-block"
+                    src=""
+                  />
+                </div>
               </div>
-              <div class="row text-center m_text mt-2 mb-2">
-                <h6>Printing Service</h6>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <p>Show everyone the best version of yourself!</p>
               </div>
-            </a>
-            <a
-              class="col m-2 card fds-card border-0 justify-content-center"
-              id="fds-card"
-              data-bs-toggle="modal"
-              data-bs-target="#FDS"
-              data-backdrop="false"
-              style="cursor: pointer"
-            >
-              <div class="row m_icons justify-content-center mt-2">
-                <img src={{url_for('static', filename='img/logo/fds_logo.png')}}
-                alt="tr-icon">
+              <div class="row">picx nga thumbnail diri per size</div>
+              <div class="row">
+                <p>Must be an actual photo of you.</p>
               </div>
-              <div class="row text-center m_text mt-2 mb-2">
-                <h6>Food Delivery Service</h6>
+              <div class="row">
+                <div class="col">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="document.getElementById('myFileInput').click()"
+                  >
+                    Change Image
+                  </button>
+                  <input
+                    type="file"
+                    id="myFileInput"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="previewImage(event)"
+                  />
+                </div>
+                <div class="col">
+                  <button type="btn" class="btn btn-primary">Save Photo</button>
+                </div>
               </div>
-            </a>
-            <a
-              class="col m-2 card gc-card border-0 justify-content-center"
-              id="gc-card"
-              data-bs-toggle="modal"
-              data-bs-target="#Gcash"
-              data-backdrop="false"
-              style="cursor: pointer"
-            >
-              <div class="row m_icons justify-content-center mt-2">
-                <img src={{url_for('static',
-                filename='img/logo/gcash_logo.png')}} alt="tr-icon">
-              </div>
-              <div class="row text-center m_text mt-2 mb-2">
-                <h6>Gcash</h6>
-              </div>
-            </a>
-            <a
-              class="col m-2 card ta-card border-0 justify-content-center"
-              id="ta-card"
-              data-bs-toggle="modal"
-              data-bs-target="#TA"
-              data-backdrop="false"
-              style="cursor: pointer"
-            >
-              <div class="row m_icons justify-content-center mt-2">
-                <img src={{url_for('static', filename='img/logo/ta_logo.png')}}
-                alt="tr-icon">
-              </div>
-              <div class="row text-center m_text mt-2 mb-2">
-                <h6>Tutorial Appointment</h6>
-              </div>
-            </a>
-            <div class="row">
-              description diri pag mo hover kay mo change ang description
             </div>
           </div>
         </div>
@@ -86,7 +60,3 @@
     </div>
   </div>
 </div>
-
-{% include 'dashboard/S_gcashModal.html' %} {% include
-'dashboard/S_taModal.html' %} {% include 'dashboard/S_fdsModal.html' %} {%
-include 'dashboard/S_printModal.html' %}

@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, SubmitField, PasswordField, FileField, validators, SelectField, RadioField
 from wtforms.validators import DataRequired, Email
 
@@ -13,5 +14,5 @@ class AccountForm(FlaskForm):
     gender = RadioField('Gender', choices=[('male', 'Male'), ('female', 'Female')], render_kw={'class': 'form-check-input'}) 
     password = PasswordField('Password', validators=[validators.Length(min=8)])
     submit = SubmitField("Update")
-    image = FileField("Image")
+    imgFile = FileField('Photo', validators=[FileAllowed('image')])
     submit = SubmitField("Update")

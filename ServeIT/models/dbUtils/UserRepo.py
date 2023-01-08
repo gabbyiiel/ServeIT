@@ -3,6 +3,7 @@ from ServeIT import mysql
 import re
 
 class UserRepo:
+
     @staticmethod
     def login(username, password):
         cur = mysql.connection.cursor()
@@ -89,4 +90,70 @@ class UserRepo:
         else:
             return None
 
+#create a function to get the current user's fname and lname in mysql database
+    @staticmethod
+    def get_current_user_name(userID):
+        cur =mysql.connection.cursor()
+        cur.execute("SELECT fname, lname FROM users WHERE user_id = %s", (userID,))
+        result = cur.fetchone()
+        if result:
+            return f"{result[0]} {result[1]}"
+        else:
+            return None
 
+#create a function to get the current user's college in mysql database
+    @staticmethod
+    def get_current_user_college(userID):
+        cur =mysql.connection.cursor()
+        cur.execute("SELECT college FROM users WHERE user_id = %s", (userID,))
+        result = cur.fetchone()
+        if result:
+            return f"{result[0]}"
+        else:
+            return None 
+
+#create a function to get the current user's course in mysql database
+    @staticmethod
+    def get_current_user_course(userID):
+        cur =mysql.connection.cursor()
+        cur.execute("SELECT course FROM users WHERE user_id = %s", (userID,))
+        result = cur.fetchone()
+        if result:
+            return f"{result[0]}"
+        else:
+            return None
+    
+#create a function to update the current user's photo in mysql database
+    @staticmethod
+    def updateImg(ImgUrl, ThumbUrl, userID):
+        cur = mysql.connection.cursor()
+        cur.execute(f'''
+                    UPDATE users
+                    SET user_imgurl='{ImgUrl}',
+                        user_thumburl='{ThumbUrl}'
+                    WHERE user_id='{userID}'
+                    ''')
+        mysql.connection.commit()
+        return
+
+#create a function to retrieve all data from the current user in users table in mysql database
+    @staticmethod
+    def get_current_user(userID):
+        cur = mysql.connection.cursor(dictionary=True)
+        cur.execute("SELECT * FROM users WHERE user_id = %s", (userID,))
+        data = cur.fetchone()
+        return data
+            
+
+#create a function to update the current user's fname and lname in mysql database
+    @staticmethod
+    def Updatename(fname, lname, userID):
+        cur = mysql.connection.cursor()
+        cur.execute(f'''
+                    UPDATE users
+                    SET fname='{fname}',
+                        lname='{lname}'
+                    WHERE user_id='{userID}'
+                    ''')
+        mysql.connection.commit()
+        return
