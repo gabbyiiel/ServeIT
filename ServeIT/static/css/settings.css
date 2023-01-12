@@ -277,26 +277,26 @@
   height: auto; /* keep the aspect ratio */
 }
 
-.card.user-basicinfo-settings {
+.card.user-info-settings {
   background-color: #fffbf4;
   border: none;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.103);
   border-radius: 24px;
 }
 
-.basicinfo-icon {
+.info-icon-btn {
   width: 20px;
   height: 20px;
 }
 
-.btn.basicinfo {
+.btn.info-setting {
   width: 46px;
   height: 46px;
   background-color: #fef7ec;
   border-radius: 50%;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.192);
 }
-.btn.basicinfo:hover {
+.btn.info-setting:hover {
   background-color: #fdf0db;
 }
 
@@ -315,9 +315,10 @@
   font-style: normal;
   font-weight: 600;
   color: #424242;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.212);
 }
 
-.user-basicinfo-label {
+.user-info-label {
   font-family: "Jost", sans-serif;
   font-style: normal;
   font-weight: 900;
@@ -325,10 +326,70 @@
   color: #424242;
 }
 
-.user-basicinfo-t {
+.user-info-t {
   font-family: "Jost", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 0.8rem;
   color: #424242;
+}
+
+.form-control {
+  font-family: "Jost", sans-serif;
+  font-style: normal;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  color: #424242 !important;
+  border-radius: 10px !important;
+
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+  border: 0px solid;
+}
+
+.form-control:focus {
+  border-color: #fdf0db !important;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25) !important;
+}
+.modal-header {
+  background-color: #6d0a03;
+  color: #face7f;
+}
+
+#image {
+  height: 300px;
+  width: 300px;
+  object-fit: cover; /* Make the image fit within the container */
+  cursor: move;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  border: rgba(0, 0, 0, 0) solid 1px;
+}
+
+#imageContainer {
+  border-radius: 50%; /* Make the border radius 50% to create a circle */
+  height: 300px;
+  width: 300px;
+  overflow: hidden;
+  position: relative;
+  outline: 1px solid rgba(0, 0, 0, 0.349);
+}
+
+#zoomSlider {
+  width: 50%;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.boundary {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
 }

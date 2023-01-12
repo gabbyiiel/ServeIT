@@ -1,12 +1,18 @@
 from flask import Flask
-from config import DB_HOST, DB_NAME, DB_USER, DB_PASS, SECRET_KEY
+from config import DB_HOST, DB_NAME, DB_USER, DB_PASS, SECRET_KEY, S3_BUCKET, S3_KEY, S3_SECRET, UPLOAD_FOLDER
 from config import CLOUD_NAME, API_KEY, API_SECRET
 from flask_mysql_connector import MySQL
 from flask_bootstrap import Bootstrap
 from flask_wtf.csrf import CSRFProtect
 import cloudinary
 import cloudinary.uploader
-from flask_ngrok import run_with_ngrok
+import boto3
+
+s3 = boto3.client(
+    's3',
+    aws_access_key_id=S3_KEY,
+    aws_secret_access_key=S3_SECRET)
+    
 
 mysql = MySQL()
 
@@ -29,7 +35,6 @@ def create_app(test_app=None):
         )
     CSRFProtect(app)
     Bootstrap(app)
-    
     #import blueprints
     from .auth import bp_auth
     from .dashboard import bp_dashboard

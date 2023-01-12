@@ -9,6 +9,7 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href={{url_for('static',
     filename='css/dashboard.css')}} />
@@ -65,6 +66,26 @@
         </li>
       </ul>
     </div>
+    <!-- TODO FIX ERROR MODAL -->
+    <!-- <div class="modal fade" id="flashModal" tabindex="-1" role="dialog" aria-labelledby="flashModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="flashModalLabel">Flash Message</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            {{ get_flashed_messages() }}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
     <!-- DASHBOARD -->
     <div class="dashboard-section">
       <!-- HEADER / NAVBAR -->
@@ -87,7 +108,6 @@
         
       </header>
     <!-- MAIN BODY -->
-    
     <div class="container mt-4"> 
       <div class="row">
         <div class="col-9">
@@ -95,7 +115,7 @@
           <div class="datetime row p-2 m-0 align-items-center">
             <div class="dategreeting col-8 align-items-center">
               <div class="date"></div>
-              <p class="greeting"></p>
+              <p class="greeting mb-0"></p>
               
             </div>
             <img class="col-4 align-items-center justify-content-end" id="sd_icon3d" src={{url_for('static',
@@ -109,13 +129,13 @@
               <div class="card TR-card border-0">
                 
                 <div class="d-flex align-items-center m-3">
-                  <div class="TR-number">
-                    <h3>
-                      526
+                  <div class="TR-number ms-1 me-2">
+                    <h3 >
+                      {{ rq }}
                     </h3>
                   </div>
                   <div class="TR-info me-md-auto">
-                    <h3>
+                    <h3 >
                       Total Request
                     </h3>
                   </div>
@@ -130,11 +150,11 @@
             </div>
             <!-- CREATE REQUEST CARD -->
             <div class="col-5">
-              <div class="card CR-card border-0">  
-                <a data-bs-toggle="modal" data-bs-target="#CreateModal" data-backdrop="false" id="open-request-modal" style="cursor: pointer;">
+              <div class="card CR-card ">  
+                <a onclick="showModal('#CreateModal')" style="cursor: pointer;">
                   <div class="d-flex align-items-center m-3">
                     <div class="CR-info me-md-auto">
-                      <h3>
+                      <h3 >
                         Create Request
                       </h3>  
                     </div>
@@ -143,21 +163,29 @@
                       filename='img/icons/Y_CRicon.png')}} alt="tr-icon">
                     </div>
                 </div>
-              </a>
-              
+                </a>
               </div>
             </div>
-            <!-- Button trigger modal -->
-            
-    
           </div>
-          <div class="row mt-4">
-            REQUEST FEED
+          <div class="row mt-4 p-2">
+            <div class="card RF-card">
+              <div class="row RF-card-header my-3 ms-1">
+                <h3>Request Feed</h3>
+              </div>
+              <div class="row RF-card-categories">
+                <div class="col d-flex categories mx-2">
+                  <h5 class="mx-2">All</h5>
+                  <h5 class="mx-2">Print Request</h5>
+                  <h5 class="mx-2">Gcash Request</h5>
+                  <h5 class="mx-2">Food Request</h5>
+                </div>
+              </div>
+              <div class="row RF-card-requests">
+                <div class="row requests-title"> </div>
+              </div>
+            </div>
           </div>
           <!-- Profile and Notif Row -->
-          <div class="col-3">
-        
-          </div>   
         </div>
         <!-- SIDE KUAN BASTA KANANG KILID SA REQUEST FEED -->
         <div class="col-3">
@@ -177,7 +205,7 @@
             <div class="user-cc d-flex justify-content-center">
               <p>TABANG MGA LANGIT</p>
             </div>
-
+            
             
 
           </div>
@@ -188,9 +216,9 @@
     {% include 'dashboard/CreateModal.html' %}
     
   </body>
-  
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script For Flash Message -->
+    
     <!-- Script For Sidebar -->
     <script defer>
       let sidebar = document.querySelector(".sidebar");
@@ -201,20 +229,6 @@
         console.log(sidebar);
         console.log(sidebar.classList);
       });
-    </script>
-    <!-- SCRIPT FOR CHANGE AVATAR NOT YET FINISHED -->
-    <script>
-      function Avatar() {
-        // Get the first name from the database
-        const firstName = UserRepo.get_fname();
-
-        // Use the first name to generate the avatar URL
-        const url = `https://avatars.dicebear.com/api/avataaars/${firstName}?size=50&style=circle.svg`;
-
-        // Update the avatar image
-        avatar.src = url;
-      }
-      window.addEventListener("load", Avatar);
     </script>
     <!-- SCRIPT FOR GETTING REALTIME DATE & User's Firstname -->
     <script>
@@ -282,28 +296,17 @@
       greetingElement.textContent = getGreeting();
     }, 200);
     </script>
-    <!-- Show Create Request Modal Type -->
+    <!-- JQUERY FOR SHOWING MODALS -->
     <script>
-      $(document).ready(function() {
-      // Initialize steps
-      var steps = new Steps('#steps');
-    
-      // Handle click on "Prev" button
-      $('#prev-btn').click(function() {
-        steps.prev();
-      });
-    
-      // Handle click on "Next" button
-      $('#next-btn').click(function() {
-        steps.next();
-      });
-    
-      // Update "Prev" button state
-      steps.on('stepchange', function() {
-        $('#prev-btn').prop('disabled', !steps.hasPrev());
-      });
-    });
-    
+      function showModal(modalId) {
+        $(modalId).modal("show");
+        $("#CreateModal").modal("hide");
+      }
+      function returnCreateModal(modalId) {
+        $(modalId).modal("hide");
+      $("#CreateModal").modal("show");
+      }
+      console.log(showModal)
+      console.log(returnCreateModal)
     </script>
-    
 </html>

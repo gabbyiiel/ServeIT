@@ -5,7 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Jost", sans-serif;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-display: swap;
 }
 
@@ -264,19 +264,19 @@ header {
 .datetime {
   border-radius: 25px;
   background-color: #fffdf9;
-  box-shadow: rgba(0, 0, 0, 0.253) 0px 3px 10px;
+  box-shadow: rgba(0, 0, 0, 0.175) 0px 3px 5px;
 }
 
 .date {
   font-family: "Mitr", sans-serif;
-  font-size: 2rem;
+  font-size: 35px;
   text-shadow: rgba(0, 0, 0, 0.253) 0px 1px 2px;
   font-weight: 700;
   color: #6d0a03;
 }
 .greeting {
   font-family: "Mitr", sans-serif;
-  font-size: 1rem;
+  font-size: 25px;
   font-weight: 600;
   text-shadow: rgba(0, 0, 0, 0.253) 0px 1px 2px;
   color: #424242;
@@ -290,14 +290,37 @@ header {
   width: 180px;
   height: auto;
 }
+.card.CR-card {
+  box-shadow: rgba(0, 0, 0, 0.175) 0px 3px 5px;
+}
 
 .card.TR-card {
   border-radius: 15px;
   background-color: #fffdf9;
-  box-shadow: rgba(0, 0, 0, 0.253) 0px 2px 5px;
+  box-shadow: rgba(0, 0, 0, 0.175) 0px 3px 5px;
 }
-.CR-card {
-  box-shadow: rgba(0, 0, 0, 0.253) 0px 2px 5px;
+.card.TR-card a {
+  text-decoration: none;
+}
+
+.TR-number h3 {
+  font-family: "Mitr", sans-serif;
+  font-style: normal;
+  color: #6d0a03;
+  font-size: 35px;
+  text-shadow: rgba(0, 0, 0, 0.253) 0px 2px 2px;
+}
+
+.TR-info h3 {
+  font-family: "Mitr", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  color: #424242;
+}
+
+.CR-info h3 {
+  font-family: "Mitr", sans-serif;
 }
 
 .TR-icon img,
@@ -319,14 +342,21 @@ header {
   background: #6d0a03;
   border-radius: 15px;
 }
-
+h3 {
+  font-size: 24px;
+  margin: 0;
+}
 .card.CR-card h3 {
   color: #face7f;
-  margin: 0;
 }
 
 .m_icons img {
   width: 150px;
+  height: auto;
+}
+.print-logo,
+.gcash-logo {
+  width: 250px;
   height: auto;
 }
 
@@ -340,6 +370,14 @@ header {
 .modal-header {
   background-color: #6d0a03;
   color: #face7f;
+}
+.btn-close:hover {
+  border-radius: 50%;
+  box-shadow: 0 0 0 0.25rem #facf7f;
+}
+.btn-close:focus {
+  border-radius: 50%;
+  box-shadow: 0 0 0 0.25rem #facf7f48;
 }
 
 #fds-card,
@@ -368,16 +406,16 @@ header {
 
 .fileinput,
 .numinput {
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 5px;
   background-color: #fffefb;
-  font-size: 12px;
   font-family: "Jost", sans-serif;
   color: #424242;
   cursor: pointer;
 }
 
-.print-modal {
+.print-modal,
+.gcash-modal {
   background-color: #fff7e7;
   border-radius: 15px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.089);
@@ -394,4 +432,79 @@ header {
 
 .form-modal-btn:hover {
   transform: scale(1.05);
+}
+
+.form-check-label {
+  background-color: #6d0a03;
+  border-radius: 10px;
+  color: #face7f;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.178);
+}
+
+.form-control::file-selector-button {
+  padding-left: 20px;
+  background-color: #6d0a03;
+  color: #face7f;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.178);
+}
+.form-control:hover:not(:disabled):not([readonly])::file-selector-button {
+  background-color: #550601;
+}
+
+#submit {
+  background-color: #6d0a03;
+  color: #face7f;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.089);
+}
+
+.form-check-input {
+  background-color: #6d0a03;
+}
+
+.form-check-input:checked {
+  background-color: #6d0a03;
+  color: #face7f;
+  border: 0;
+}
+
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(255, 222, 113, 0.25);
+}
+.form-check-input:checked[type="radio"] {
+  background-image: url(../img/icons/Y_check.png);
+}
+
+.payment-text {
+  font-family: "Mitr";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.RF-card-header h3 {
+  font-family: "Mitr";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 25px;
+  color: #6d0a03;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.253);
+}
+
+.card.RF-card {
+  background-color: #fffdf9;
+  border: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.089);
+  border-radius: 15px;
+}
+.categories h5 {
+  font-family: "Mitr";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+}
+.categories {
+  border-bottom: 1px solid #424242;
+}
+.RF-card-requests {
 }

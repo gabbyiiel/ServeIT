@@ -1,46 +1,86 @@
-<div class="modal fade in" id="GCASH">
-  <div class="modal-dialog modal-dialog-centered" style="max-width: 750px">
-    <div class="modal-content" style="border: 0;">
+<div class="modal fade" id="GCASH">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 950px">
+    <div class="modal-content" style="border: 0">
       <div class="modal-header">
-        <a data-bs-toggle="modal" data-bs-target="#CreateModal" data-backdrop="false" style="cursor: pointer"> 
-          <img class="back-icon me-3 " src={{url_for('static',
-          filename='img/icons/Y_back.png')}} alt="return-icon">         
-        </a>
-        <h5 class="modal-title mb-0">Gcash Transaction</h5>
-        <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="modal"
-        aria-label="Close"
+        <a
+          onclick="returnCreateModal('#GCASH')"
+          data-bs-toggle="modal"
+          style="cursor: pointer"
         >
-        </button> 
-        </div>
-      
-      <div class="modal-body">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col m_icons justify-content-center align-items-center m-2">
-                <img src={{url_for('static',
-                filename='img/logo/gcash_logo.png')}} alt="tr-icon">
-            </div>
-            <div class="col m-2 align-items-center">
-              <div class="row m-1">
-                <button type="button" class="btn btn-light">Gcash Cash-in</button>
-              </div>
-              <div class="row m-1">
-                <button type="button" class="btn btn-light">Gcash Cash-out</button>
-              </div>
-              <div class="row m-1">
-                <button type="button" class="btn btn-light">Other</button>
-              </div>
-            
-            </div>
-            
-            
-          </div>
-        </div>
+          <img class="back-icon me-3 " src={{url_for('static',
+          filename='img/icons/Y_back.png')}} alt="return-icon">
+        </a>
+        <h5 class="modal-title mb-0">Gcash Service</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
-        
+      <div class="modal-body">
+        <div class="container">
+          <form
+            action="{{ url_for('bp_dashboard.add_print_request') }}"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            {{ form.hidden_tag() }}
+            <div class="row gcash-modal">
+              <div
+                class="col-6 d-flex justify-content-center align-self-center"
+              >
+                <img class="gcash-logo" src={{url_for('static',
+                filename='img/logo/gcash_logo.png')}} alt="gcash_logo">
+              </div>
+              <div class="col-6 mt-2"></div>
+            </div>
+            <div class="row paymentinfo mt-3">
+              <div class="row">
+                <div class="col d-flex justify-content-center">
+                  <input
+                    class="form-check-input me-2 align-self-center"
+                    type="radio"
+                    name="MOP"
+                    id="flexRadioDefault1"
+                    value="Gcash"
+                  />
+                  <label
+                    class="form-check-label px-2 py-1"
+                    for="flexRadioDefault1"
+                  >
+                    Gcash
+                  </label>
+                </div>
+                <div class="col d-flex justify-content-center">
+                  <input
+                    class="form-check-input me-2 align-self-center"
+                    type="radio"
+                    name="MOP"
+                    id="flexRadioDefault1"
+                    value="COD"
+                  />
+                  <label
+                    class="form-check-label px-2 py-1"
+                    for="flexRadioDefault1"
+                  >
+                    Cash on Delivery
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <p class="payment-text mx-auto text-center my-2">
+                  Total payment may vary on the requested service
+                </p>
+              </div>
+              <div class="row">
+                <div class="col d-flex align-items-center my-2">
+                  {{form.submit(class_='btn mx-auto', value='Submit Request') }}
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

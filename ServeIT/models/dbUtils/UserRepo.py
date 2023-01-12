@@ -129,8 +129,8 @@ class UserRepo:
         cur = mysql.connection.cursor()
         cur.execute(f'''
                     UPDATE users
-                    SET user_imgurl='{ImgUrl}',
-                        user_thumburl='{ThumbUrl}'
+                    SET ImgUrl='{ImgUrl}',
+                        ThumbUrl='{ThumbUrl}'
                     WHERE user_id='{userID}'
                     ''')
         mysql.connection.commit()

@@ -10,3 +10,9 @@ DB_PASS = getenv('DB_PASS')
 CLOUD_NAME = getenv('CLOUD_NAME')
 API_KEY = getenv('API_KEY')
 API_SECRET = getenv('API_SECRET')
+
+S3_BUCKET = getenv('S3_BUCKET')
+S3_KEY = getenv('S3_KEY')
+S3_SECRET = getenv('S3_SECRET')
+
+UPLOAD_FOLDER = getenv('UPLOAD_FOLDER')
