@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="icon" href="{{url_for('static', filename='img/logo/SDB_icon.png')}}">
-
       <meta charset="UTF-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,10 +13,9 @@
         crossorigin="anonymous"
       />
       <!-- CSS File -->
-      <link
-        rel="stylesheet"
-        href="{{url_for('static', filename='css/style.css') }}"
-      />
+      <link rel="icon" href={{url_for('static', filename='img/logo/SDB_icon.png')}}>
+      <link rel="stylesheet" href={{url_for('static', filename='css/style.css') }}/>
+  
 
   </head>
   <!--  -->
@@ -70,27 +67,19 @@
       </div>
   
       <!-- LOGO LEFT -->
-      <a
-        class="u-block c-link u-fixed c-logo u-pad-a-md is-active"
-        href="/"
-        style="z-index: 99999"
-      >
-        <img class="sd u-inline-block u-valign-middle u-fit-w"
-        src={{url_for('static', filename='img/logo/SDW_logo.png')}}></a
-      >
+      <a class="logo-left-container p-2" href="/" style="z-index: 99999" >
+        <img class="logo-left-img" src={{url_for('static', filename='img/logo/SDW_logo.png')}}></a>
       <!-- LOGO RIGHT -->
-      <a
-        href="/login"
-        aria-controls="menu"
-        aria-expanded="true"
-        aria-label="Open menu"
-        class="c-block c-menu c-fixed u-pad-a-md"
-        style="z-index: 99999"
-      >
-        <img class="sdi" src={{url_for('static',
-        filename='img/logo/SD_icon.png')}}>
-        <!-- sign up and login box -->
-      </a>
+      <div class="logo-right-container p-2">
+        <a  style="z-index: 99999">
+          <img class="logo-right-img me-2" src={{url_for('static', filename='img/logo/SD_icon.png')}}>
+          <!-- sign up and login box -->
+          <div class="text-container">
+              <a class="logo-right-text d-flex" href="/login">Login</a>
+              <a class="logo-right-text d-flex" href="/signup">Sign up</a>
+          </div>
+        </a>
+      </div>
     </div>
 
     <script></script>

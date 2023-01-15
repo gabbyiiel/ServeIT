@@ -26,16 +26,6 @@
   padding-left: 15px;
 }
 
-.logo-right-container:hover img {
-  display: none;
-}
-
-.logo-right-container:hover .logo-right-text {
-  display: inline-block;
-}
-
-
-
 .logo-left-container {
   width: auto;
   background: #6d0a03;
@@ -48,7 +38,34 @@
   height: auto;
 }
 
+.text-container {
+  display: none;
+  position: relative;
+  margin: auto;
+}
+.logo-right-container:hover .text-container {
+  display: block;
+  transition: display 0.5s ease-in-out;
+}
+.logo-right-container:hover .logo-right-img {
+  display: none;
+  transition: display 0.5s ease-in-out;
+}
 
+.logo-right-text {
+  font-family: "Jost";
+  font-size: 20px;
+  font-weight: 700;
+  color: #FFCE85;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.35);
+  padding: 10px;
+  text-decoration: none;
+}
+
+.logo-right-text:hover {
+  color: #fae5c5;
+
+}
 .navbar {
   background-color: #6D0A03;
 }
@@ -66,7 +83,8 @@
 }
 
 .container {
-  background-image: url("../img/backgrounds/patternbg.png");
+  background-image: url("/static/img/backgrounds/patternbg.png");
+
 }
 
 .services-img {
@@ -74,7 +92,7 @@
   height: auto;
 }
 
-.services-text h2{
+.services-text h2 {
   font-family: "Mitr";
   font-size: 40px;
   font-weight: 600;
