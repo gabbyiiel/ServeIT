@@ -66,14 +66,16 @@
               </div>
               <!-- id number, college, course input-->
               <div class="row">
-                <div class="col-12 col-md-4 mb-2">
+                <div class="col-12 col-md-6 mb-2">
                   {{ form.idnumber(class_='form-control', placeholder='Id Number')}}
                 </div>
-                <div class="col-12 col-md-4 mb-2">
-                  {{ form.college(class_='form-control')}}
-                </div>
-                <div class="col-12 col-md-4 mb-2">
-                  {{ form.course(class_='form-control', placeholder='Course')}}
+                <div class="col-12 col-md-6 mb-2">
+                  <select name="college" class="form-control selectpicker" required>
+                    <option selected disabled value="">College</option>
+                    {% for college in colleges %}
+                    <option value="{{ college['collegeCode'] }}">{{ college['collegeName'] }}</option>
+                    {% endfor %}
+                  </select>
                 </div>
               </div>
               <!-- username input-->
@@ -129,7 +131,7 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
-
+    
   <script src="{{url_for('static', filename='js/signup-select.js') }}" defer> </script>
   {% with messages = get_flashed_messages() %}
   {% if messages %}

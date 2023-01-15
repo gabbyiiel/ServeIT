@@ -4,7 +4,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Jost", sans-serif;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-display: swap;
 }
 
@@ -277,11 +277,19 @@
   height: auto; /* keep the aspect ratio */
 }
 
-.card.user-info-settings {
+.card.user-info-settings,
+.card.user-info-nav {
   background-color: #fffbf4;
   border: none;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.103);
   border-radius: 24px;
+}
+
+#BasicInfoCard,
+#UserInfoCard,
+#SchoolInfoCard {
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
 }
 
 .info-icon-btn {
@@ -324,6 +332,7 @@
   font-weight: 900;
   font-size: 1rem;
   color: #424242;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.212);
 }
 
 .user-info-t {
@@ -393,3 +402,63 @@
   height: 300px;
   overflow: hidden;
 }
+.user-profile-header {
+  background-color: #fffbf4 !important;
+  border-radius: 15px !important;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.178);
+}
+
+.user-profile-header * {
+  font-family: "Mitr";
+  font-style: normal;
+  font-weight: 600;
+}
+
+.row.user-name {
+  font-size: 25px;
+  color: #424242;
+}
+.row.user-college {
+  font-weight: 500;
+  font-size: 14px;
+  color: #6d0a03;
+}
+
+.row.user-course p {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.btn.profile-setting-button {
+  font-family: "Jost";
+  color: #face7f;
+  background-color: #6d0a03;
+  border-radius: 40px;
+}
+
+.info-nav1,
+.info-nav2,
+.info-nav3 {
+  font-family: "Mitr";
+  font-weight: 500;
+  text-decoration: none;
+  color: #424242;
+  font-size: 1.1rem;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.212);
+}
+
+.info-nav1:hover,
+.info-nav2:hover,
+.info-nav3:hover {
+  color: #6d0a03;
+  cursor: pointer;
+}
+
+#update-btn {
+  color: #face7f;
+  background-color: #6d0a03;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.212);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.212);
+  border-radius: 20px;
+}
+

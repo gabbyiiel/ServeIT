@@ -10,13 +10,13 @@ document.querySelector("#college").addEventListener("change", function() {
 // update options for course drop-down menu
 function updateCourseOptions(college) {
   // get course drop-down menu
-  var courseSelect = document.querySelector("#course");
+  var courseSelect = document.querySelector("#courses");
 
   // clear existing options
   courseSelect.innerHTML = "";
 
   // add options based on selected college
-  if (college == "CCS") {
+  if (college == "College of Computer Studies") {
     courseSelect.innerHTML += "<option value='BSCS'>BSCS</option>";
     courseSelect.innerHTML += "<option value='BSIT'>BSIT</option>";
     courseSelect.innerHTML += "<option value='BSDA'>BSDA</option>";

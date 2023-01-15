@@ -1,55 +1,48 @@
-<div class="modal fade in" id="PhotoModal">
-  <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px">
-    <div class="modal-content" style="border: 0">
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="PhotoModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Edit Photo</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <h5 class="modal-title" id="myModalLabel">Crop Image</h5>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
       </div>
       <div class="modal-body">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-6">
-              <div class="row justify-content-center">
-                <div class="boundary">
-                  <canvas></canvas>
-                  <div class="overlay"></div>
-                </div>
-              </div>
-              </div>
-              <div class="col-6">
-                <div class="row">
-                  <p>Show everyone the best version of yourself!</p>
-                </div>
-                <div class="row">picx nga thumbnail diri per size</div>
-                <div class="row">
-                  <p>Must be an actual photo of you.</p>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <button
-                      id="file-button"
-                      type="button"
-                      class="btn btn-primary"
-                    >
-                      Change Image
-                    </button>
-                    <input type="file" id="file-input" accept="image/*"style="display: none;" />
-                  </div>
-                  <div class="col">
-                    <button type="btn" class="btn btn-primary">
-                      Save Photo
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="row">
+          <div class="col-md-8">
+            <img id="upload-preview" src="" />
+            <div id="image-cropper"></div>
+          </div>
+          <div class="col-md-4">
+            <div id="preview-cropper"></div>
           </div>
         </div>
+      </div>
+
+      <div class="modal-footer">
+        <label class="btn btn-primary btn-file">
+          Upload Image
+          <input type="file" id="image-input" style="display: none" />
+        </label>
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-dismiss="modal"
+          id="reset-cropper"
+        >
+          Reset
+        </button>
+        <button type="button" class="btn btn-success" id="crop-image">
+          Crop
+        </button>
       </div>
     </div>
   </div>

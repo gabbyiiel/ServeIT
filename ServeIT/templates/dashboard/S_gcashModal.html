@@ -20,66 +20,128 @@
       </div>
       <div class="modal-body">
         <div class="container">
-          <form
-            action="{{ url_for('bp_dashboard.add_print_request') }}"
-            method="POST"
-            enctype="multipart/form-data"
-          >
-            {{ form.hidden_tag() }}
-            <div class="row gcash-modal">
-              <div
-                class="col-6 d-flex justify-content-center align-self-center"
+          <div class="row gcash-modal">
+            <div class="col-7 d-flex justify-content-center align-self-center">
+              <img class="gcash-logo p-2" src={{url_for('static',
+              filename='img/logo/gcash_logo.png')}} alt="gcash_logo">
+            </div>
+            <div
+              class="col-4 gcash-selection mt-2 justify-content-center align-self-center"
+              id="gcash-option"
+            >
+            <form
+                action="{{ url_for('bp_dashboard.add_gcash_request') }}"
+                method="POST"
+                enctype="multipart/form-data"
               >
-                <img class="gcash-logo" src={{url_for('static',
-                filename='img/logo/gcash_logo.png')}} alt="gcash_logo">
+              <div class="row m-2">
+                <input
+                  type="submit"
+                  class="btn gcash-btn"
+                  id="cash-in"
+                  value="Cash-in"
+                />
               </div>
-              <div class="col-6 mt-2"></div>
-            </div>
-            <div class="row paymentinfo mt-3">
-              <div class="row">
-                <div class="col d-flex justify-content-center">
-                  <input
-                    class="form-check-input me-2 align-self-center"
-                    type="radio"
-                    name="MOP"
-                    id="flexRadioDefault1"
-                    value="Gcash"
-                  />
-                  <label
-                    class="form-check-label px-2 py-1"
-                    for="flexRadioDefault1"
-                  >
-                    Gcash
-                  </label>
-                </div>
-                <div class="col d-flex justify-content-center">
-                  <input
-                    class="form-check-input me-2 align-self-center"
-                    type="radio"
-                    name="MOP"
-                    id="flexRadioDefault1"
-                    value="COD"
-                  />
-                  <label
-                    class="form-check-label px-2 py-1"
-                    for="flexRadioDefault1"
-                  >
-                    Cash on Delivery
-                  </label>
-                </div>
-              </div>
-              <div class="row">
-                <p class="payment-text mx-auto text-center my-2">
-                  Total payment may vary on the requested service
-                </p>
-              </div>
-              <div class="row">
-                <div class="col d-flex align-items-center my-2">
-                  {{form.submit(class_='btn mx-auto', value='Submit Request') }}
-                </div>
+              <div class="row m-2">
+                <input
+                  type="submit"
+                  class="btn gcash-btn"
+                  id="cash-out"
+                  value="Cash-out"
+                />
               </div>
             </div>
-          </form>
+            <div
+              class="col-4 mt-2 justify-content-center align-self-center"
+              id="gcash-in-option"
+              style="display: none"
+            >
+              
+                {{ gform.hidden_tag() }}
+                <div class="row m-2 gcash-header p-3">
+                  <button type="button" class="btn gcash-btn" id="cash-in-req">
+                    Cash-in Request
+                  </button>
+                </div>
+                <div class="row m-2">
+                  {{ gform.phone_number(class_='form-control gcash-number',
+                  placeholder='Phone Number') }}
+                </div>
+                <div class="row m-2">
+                  {{ gform.amount(class_='form-control gcash-amount',
+                  placeholder='Amount') }}
+                </div>
+                <div class="row m-2">
+                  {{ gform.location(class_='form-control gcash-amount',
+                  placeholder='Location') }}
+                </div>
+                <div class="row paymentinfo mt-3">
+                  <div class="row">
+                    <p class="payment-text mx-auto text-center my-2">
+                      Total payment may vary on the requested service
+                    </p>
+                  </div>
+                  <div class="row">
+                    <div
+                      class="col d-flex align-items-center my-2"
+                      id="submit-btn"
+                    >
+                      <button class="btn d-flex mx-auto p-2" id="submit">
+                        {{gform.submit(class_='btn', value='Submit Request') }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div
+              class="col-4 mt-2 justify-content-center align-self-center"
+              id="gcash-out-option"
+              style="display: none"
+            >
+              <form
+                action="{{ url_for('bp_dashboard.add_gcash_request') }}"
+                method="POST"
+                enctype="multipart/form-data"
+              >
+                {{ gform.hidden_tag() }}
+                <div class="row m-2 gcash-header p-3">
+                  <button type="button" class="btn gcash-btn" id="cash-out-req">
+                    Cash-Out Request
+                  </button>
+                </div>
+                <div class="row m-2">
+                  {{ gform.phone_number(class_='form-control gcash-number',
+                  placeholder='Phone Number') }}
+                </div>
+                <div class="row m-2">
+                  {{ gform.amount(class_='form-control gcash-amount',
+                  placeholder='Amount') }}
+                </div>
+                <div class="row m-2">
+                  {{ gform.location(class_='form-control gcash-amount',
+                  placeholder='Location') }}
+                </div>
+                <div class="row paymentinfo mt-3">
+                  <div class="row">
+                    <p class="payment-text mx-auto text-center my-2">
+                      Total payment may vary on the requested service
+                    </p>
+                  </div>
+                  <div class="row">
+                    <div
+                      class="col d-flex align-items-center my-2"
+                      id="submit-btn"
+                    >
+                      <button class="btn d-flex mx-auto p-2" id="submit">
+                        {{gform.submit(class_='btn', value='Submit Request') }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@
         <h5 class="modal-title mb-0">Printing Service</h5>
         <button
           type="button"
-          class="btn-close"
+          class="btn-close me-2"
           data-bs-dismiss="modal"
           aria-label="Close"
         ></button>
@@ -21,7 +21,7 @@
             method="POST"
             enctype="multipart/form-data"
           >
-            {{ form.hidden_tag() }}
+            {{ pform.hidden_tag() }}
             <div class="row print-modal">
               <div
                 class="col-6 d-flex justify-content-center align-self-center"
@@ -30,23 +30,24 @@
                 filename='img/logo/printing_logo.png')}} alt="print_logo">
               </div>
               <div class="col-6 mt-2">
-                <div class="row justify-content-center align-items-center">
+                <div class="row justify-content-center align-items-center me-2">
                   <div class="row p-1">
-                    {{ form.printfile(class_='form-control fileinput',
+                    {{ pform.printfile(class_='form-control fileinput',
                     placeholder='File', id='file') }}
                   </div>
                   <div class="row p-1">
-                    {{form.num_copies(class_='form-control numinput',
+                    {{pform.num_copies(class_='form-control numinput',
                     placeholder=' Number of Copies')}}
                   </div>
-                </div>
-                <div class="row p-1">
-                  {{form.specification(class_='form-control specinput',
-                  placeholder='Specification')}}
-                </div>
-                <div class="row p-1 mb-2">
-                  {{form.location(class_='form-control locinput',
-                  placeholder='Delivery Location/Meetup Location')}}
+
+                  <div class="row p-1">
+                    {{pform.description(class_='form-control specinput',
+                    placeholder='Description')}}
+                  </div>
+                  <div class="row p-1 mb-2">
+                    {{pform.location(class_='form-control locinput',
+                    placeholder='Delivery Location/Meetup Location')}}
+                  </div>
                 </div>
               </div>
             </div>
@@ -59,6 +60,7 @@
                     name="MOP"
                     id="flexRadioDefault1"
                     value="Gcash"
+                    required
                   />
                   <label
                     class="form-check-label px-2 py-1"
@@ -74,6 +76,7 @@
                     name="MOP"
                     id="flexRadioDefault1"
                     value="COD"
+                    required
                   />
                   <label
                     class="form-check-label px-2 py-1"
@@ -90,7 +93,8 @@
               </div>
               <div class="row">
                 <div class="col d-flex align-items-center my-2">
-                  {{form.submit(class_='btn mx-auto', value='Submit Request') }}
+                  {{pform.submit(class_='btn mx-auto', value='Submit Request')
+                  }}
                 </div>
               </div>
             </div>

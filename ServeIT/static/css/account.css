@@ -4,7 +4,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Jost", sans-serif;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-display: swap;
 }
 
@@ -262,17 +262,65 @@
 }
 
 .user-profile-header {
-  background-color: #face7f;
-  border-radius: 15px;
+  background-color: #fffbf4 !important;
+  border-radius: 15px !important;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.178);
 }
 
+.user-profile-header * {
+  font-family: "Mitr";
+  font-style: normal;
+  font-weight: 600;
+}
+
+.row.user-name {
+  font-size: 25px;
+  color: #424242;
+}
+.row.user-college {
+  font-weight: 500;
+  font-size: 14px;
+  color: #6d0a03;
+}
+
+.row.user-course p {
+  font-weight: 500;
+  font-size: 14px;
+}
 .edit-pic-icon {
   width: 20px;
   height: auto;
 }
 
-.UserImgContainer {
-  border-radius: 100%; /* make the corners rounded */
-  width: 100%; /* stretch the image to fill its container */
-  height: auto; /* keep the aspect ratio */
+.btn.profile-setting-button {
+  font-family: "Jost";
+  color: #face7f;
+  background-color: #6d0a03;
+  border-radius: 40px;
+}
+.card.user-info *,
+.card.student-info *,
+.card.user-stats * {
+  font-family: "Mitr";
+  font-weight: 500;
+}
+
+.card.user-info h4,
+.card.student-info h4,
+label {
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.212);
+}
+
+.card.user-info,
+.card.student-info,
+.card.user-stats {
+  background: #fffbf4;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 24px;
+}
+
+.Rq-num {
+  font-size: 30px;
+  color: #6d0a03;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.212);
 }

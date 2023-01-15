@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import FileField, IntegerField, TextAreaField, SubmitField, StringField, ValidationError, RadioField
-from wtforms.validators import DataRequired, NumberRange
+from wtforms.validators import DataRequired, NumberRange, Regexp, InputRequired
 
 def allowed_file_extensions(form, field):
         if not field.data:
@@ -15,13 +15,18 @@ def allowed_file_extensions(form, field):
             raise ValidationError('Invalid file extension')
 
 
-class ServicesForm(FlaskForm):
+class PrintForm(FlaskForm):
     printfile = FileField('File', render_kw={"id": "print-id"}, validators=[DataRequired()])
     num_copies = IntegerField('Number of Copies', validators=[DataRequired(), NumberRange(min=1)])
-    specification = TextAreaField('Specification', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
     location = StringField('Location', validators=[DataRequired()])
-
+    submit = SubmitField('Submit Request')
     
+
+class GcashForm(FlaskForm):
+    phone_number = StringField('Phone Number', validators=[DataRequired(), Regexp(r'^\+?1?\d{9,14}$', message="Phone number must be in the format: '+999999999'"), Regexp(r'^[0-9]*$', message="Phone number can only contain digits.")])
+    amount = IntegerField('Amount', validators=[DataRequired(), NumberRange(min=20, max=5000)])
+    location = StringField('Location', validators=[DataRequired()])
     submit = SubmitField('Submit Request')
 
     

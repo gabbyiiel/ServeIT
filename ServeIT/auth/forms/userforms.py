@@ -8,14 +8,10 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
 class SignupForm(FlaskForm):
-    fname = StringField('First Name')
-    lname = StringField('Last Name')
+    fname = StringField('First Name', validators=[DataRequired()])
+    lname = StringField('Last Name', validators=[DataRequired()])
     email = StringField('Email',validators=[validators.Email()])
-    idnumber = StringField('Id Number')
-    
-    college = SelectField('College',choices=[('' , 'College'),('CCS' , 'CCS'),('CSM', 'CSM'),('CEBA', 'CEBA'),('CASS', 'CASS'),('CON', 'CON'),('CED', 'CED'),('COET', 'COET')],)
-    
-    course = SelectField('Course', choices=[('','Course')])
+    idnumber = StringField('Id Number', validators=[DataRequired()])
     password = PasswordField('Password', validators=[
         validators.Length(min=8)])
     username = StringField('Username',validators=[validators.Length(min=4, max=25)])

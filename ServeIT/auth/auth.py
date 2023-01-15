@@ -1,7 +1,7 @@
 from flask import render_template, request, flash, redirect, session, url_for
 from . import bp_auth
 import functools
-from ServeIT.models.dbUtils.UserRepo import UserRepo
+from ServeIT.models.dbUtils.UserRepo import UserRepo, College
 from .forms.userforms import LoginForm, SignupForm
 
 def login_required(view):
@@ -16,17 +16,18 @@ def login_required(view):
 
 @bp_auth.route ('/')
 def index():
-    return render_template("home/test.html")
+    title='ServeIT'
+    return render_template("home/home.html", title=title)
 
 @bp_auth.route('/about')
 def ap_index():
     title = 'About'
-    return render_template("aboutpage/base.html", title=title)
+    return render_template("home/about.html", title=title)
 
 @bp_auth.route('/services')
 def sp_index():
     title = 'Services'
-    return render_template("servicespage/base.html", title=title)
+    return render_template("home/services.html", title=title)
 
 @bp_auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -61,27 +62,26 @@ def logout():
 def sign_up():
     title = 'Sign Up'
     form = SignupForm()
+    collegeList = College.college_retrieveAll()
+    coursesList = College.courses_retrieveAll()
     if form.validate_on_submit():
         fname = form.fname.data
         lname = form.lname.data
         email = form.email.data
-        college = form.college.data
+        college = request.form.get('college')
         idnumber = form.idnumber.data
-        course = form.course.data
         password = form.password.data
         gender = form.gender.data
         username = form.username.data
         # call signup function and check if it returns an error
-        result = UserRepo.signup(username, idnumber, fname, lname, email, course, college, password, gender)
+        result = UserRepo.signup(username, idnumber, fname, lname, email, college, password, gender)
         if result['code'] == -1:
             flash(result['message'])
             # Keep the inputted form data and clear the invalid input fields
             form.fname.data = fname
             form.lname.data = lname
             form.email.data = email
-            form.college.data = college
             form.idnumber.data = idnumber
-            form.course.data = course
             form.password.data = password
             form.gender.data = gender
             form.username.data = username
@@ -91,19 +91,15 @@ def sign_up():
               form.lname.data = ""
             if form.email.errors:
               form.email.data = ""
-            if form.college.errors:
-              form.college.data = ""
             if form.idnumber.errors:
               form.idnumber.data = ""
-            if form.course.errors:
-              form.course.data = ""
             if form.password.errors:
               form.password.data = ""
             if form.gender.errors:
               form.gender.data = ""
             if form.username.errors:
               form.username.data = ""
-            return render_template("signup/signup.html", form=form, title=title)
+            return render_template("signup/signup.html", form=form, title=title, colleges=collegeList)
         else:
             return redirect('login')
-    return render_template("signup/signup.html", form=form, title=title)
+    return render_template("signup/signup.html", form=form, title=title, colleges=collegeList)

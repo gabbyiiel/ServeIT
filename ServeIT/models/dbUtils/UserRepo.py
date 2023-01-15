@@ -2,6 +2,33 @@
 from ServeIT import mysql
 import re
 
+class College:
+    def college_retrieveAll():
+        cur = mysql.connection.cursor(dictionary=True)
+        cur.execute("SELECT * FROM college")
+        data = cur.fetchall()
+        return data
+    
+    def courses_retrieveAll():
+        cur = mysql.connection.cursor(dictionary=True)
+        cur.execute("SELECT * FROM courses")
+        data = cur.fetchall()
+        return data
+    
+    @staticmethod
+    def get_user_college(college):
+        cur = mysql.connection.cursor(dictionary=True)
+        cur.execute(f"SELECT * FROM college WHERE collegeCode = '{college}'")
+        data = cur.fetchone()
+        return data
+    
+    @staticmethod
+    def get_user_course(course):
+        cur = mysql.connection.cursor(dictionary=True)
+        cur.execute(f"SELECT * FROM courses WHERE courseCode = '{course}'")
+        data = cur.fetchone()
+        return data
+
 class UserRepo:
 
     @staticmethod
@@ -30,7 +57,7 @@ class UserRepo:
             }
 
     @staticmethod
-    def signup(username, idnumber, fname, lname, email, course, college, password, gender):
+    def signup(username, idnumber, fname, lname, email, college, password, gender):
         cur = mysql.connection.cursor()
         # Retrieve the maximum value of the user_id column
         cur.execute("SELECT MAX(user_id) FROM users")
@@ -39,7 +66,7 @@ class UserRepo:
 
         # Extract the number part from the maximum user_id and increment it by 1
         if max_user_id:
-            number_part = int(max_user_id.split("SCSD")[1]) + 1
+            number_part = int(max_user_id.split("SDID")[1]) + 1
         else:
             # If the services table is empty, start the user_id from 1
             number_part = 1
@@ -65,8 +92,8 @@ class UserRepo:
         if user is not None:
             return {'code': -1, 'message': 'Email is already taken'}
         try:
-            cur.execute(f''' INSERT INTO `users`(`user_id`, `username`, `idnumber`, `fname`, `lname`, `email`, `college`, `course`, `password`, `gender`) VALUES
-                        ('{user_id}','{username}','{idnumber}','{fname}','{lname}','{email}','{college}','{course}','{password}','{gender}')
+            cur.execute(f''' INSERT INTO `users`(`user_id`, `username`, `idnumber`, `fname`, `lname`, `email`, `college`, `password`, `gender`) VALUES
+                        ('{user_id}','{username}','{idnumber}','{fname}','{lname}','{email}','{college}','{password}','{gender}')
                         ''')
             mysql.connection.commit()
             return {
@@ -147,13 +174,55 @@ class UserRepo:
 
 #create a function to update the current user's fname and lname in mysql database
     @staticmethod
-    def Updatename(fname, lname, userID):
-        cur = mysql.connection.cursor()
-        cur.execute(f'''
-                    UPDATE users
-                    SET fname='{fname}',
-                        lname='{lname}'
-                    WHERE user_id='{userID}'
-                    ''')
-        mysql.connection.commit()
-        return
+    def Updatebasicinfo(fname, lname, contactnum,userID):
+        try:
+            cur = mysql.connection.cursor()
+            cur.execute(f'''
+                        UPDATE users
+                        SET `fname` = '{fname}',
+                            `lname` = '{lname}',
+                            `contact_number` = '{contactnum}'
+                        WHERE user_id='{userID}'
+                        ''')
+            mysql.connection.commit()
+            cur.close()
+        except Exception as e:
+            print("An error occurred: ", e)
+            return False
+        return True
+    
+    @staticmethod
+    def Updateuserinfo(username, password,userID):
+        try:
+            cur = mysql.connection.cursor()
+            cur.execute(f'''
+                        UPDATE users
+                        SET `username` = '{username}',
+                            `password` = '{password}'
+                        WHERE user_id='{userID}'
+                        ''')
+            mysql.connection.commit()
+            cur.close()
+        except Exception as e:
+            print("An error occurred: ", e)
+            return False
+        return True
+    
+    @staticmethod
+    def Updateschoolinfo(idnumber, college, course,userID):
+        try:
+            cur = mysql.connection.cursor()
+            cur.execute(f'''
+                        UPDATE users
+                        SET `idnumber` = '{idnumber}',
+                            `college` = '{college}',
+                            `course` = '{course}'
+                        WHERE user_id='{userID}'
+                        ''')
+            mysql.connection.commit()
+            cur.close()
+        except Exception as e:
+            print("An error occurred: ", e)
+            return False
+        return True
+

@@ -89,7 +89,7 @@
     <!-- DASHBOARD -->
     <div class="dashboard-section">
       <!-- HEADER / NAVBAR -->
-      <header class="d-flex flex-wrap justify-content-center pt-2 pb-2">
+      <header class="navbar-header d-flex flex-wrap justify-content-center pt-2 pb-2">
         <ul class="nav nav-pills me-md-auto">
           <li class="nav-item ms-3 mt-1">
             <img class="icons" src={{url_for('static',
@@ -180,34 +180,143 @@
                   <h5 class="mx-2">Food Request</h5>
                 </div>
               </div>
-              <div class="row RF-card-requests">
-                <div class="row requests-title"> </div>
+              {% for request in rqlist %}
+                {% if request['service_name'] == 'SFPR' %}
+                <div class="row RF-card-requests p-2" >
+                  <div class="col-8" >
+                    <div class="row requests-title mt-2"> 
+                      <h4>Printing Request</h4>
+                    </div>
+                    <div class="row request-info ">
+                      <h5>{{ request['request_id'] }} - {{ request['location'] }}</h5>
+                    </div>
+                    <div class="row request-description">
+                      <h6>{{ request['description'] }} </h6>
+                    </div>
+                  </div>
+                  {% if request['user_id'] == user['user_id'] %}
+                  <div class="col-4 d-flex justify-content-center align-self-center" >
+                    <button type="button" class="btn accept-request " disabled>
+                      Listing
+                    </button>
+                  </div>
+                  {% else %}
+                  <div class="col-4 d-flex justify-content-center align-self-center" >
+                    <button type="button" class="btn accept-request mx-2">
+                      Accept
+                    </button>
+                    <button type="button" class="btn later-request">
+                      Later
+                    </button>
+                  </div>
+                  {% endif %}
+                {% elif request['service_name'] == 'SFGC' %}
+                <div class="row RF-card-requests p-2" >
+                  <div class="col-8" >
+                    <div class="row requests-title mt-2"> 
+                      <h4>Gcash Request</h4>
+                    </div>
+                    <div class="row request-info ">
+                      <h5>{{ request['request_id'] }} - {{ request['location'] }}</h5>
+                    </div>
+                    <div class="row request-description">
+                      <h6>{{ request['description'] }} </h6>
+                    </div>
+                  </div>
+                  {% if request['user_id'] == user['user_id'] %}
+                  <div class="col-4 d-flex justify-content-center align-self-center" >
+                    <button type="button" class="btn accept-request " disabled>
+                      Listing
+                    </button>
+                  </div>
+                  {% else %}
+                  <div class="col-4 d-flex justify-content-center align-self-center" >
+                    <button type="button" class="btn accept-request mx-2">
+                      Accept
+                    </button>
+                    <button type="button" class="btn later-request">
+                      Later
+                    </button>
+                  </div>
+                  {% endif %}
+                {% elif request['service_name'] == 'SFFDS' %}
+                <div class="row RF-card-requests p-2" >
+                  <div class="col-8" >
+                    <div class="row requests-title mt-2"> 
+                      <h4>Food Request</h4>
+                    </div>
+                    <div class="row request-info ">
+                      <h5>{{ request['request_id'] }} - {{ request['location'] }}</h5>
+                    </div>
+                    <div class="row request-description">
+                      <h6>{{ request['description'] }} </h6>
+                    </div>
+                  </div>
+                  {% if request['user_id'] == user['user_id'] %}
+                  <div class="col-4 d-flex justify-content-center align-self-center" >
+                    <button type="button" class="btn accept-request " disabled>
+                      Listing
+                    </button>
+                  </div>
+                  {% else %}
+                  <div class="col-4 d-flex justify-content-center align-self-center" >
+                    <button type="button" class="btn accept-request mx-2">
+                      Accept
+                    </button>
+                    <button type="button" class="btn later-request">
+                      Later
+                    </button>
+                  </div>
+                  {% endif %}
+                {% else %}
+                <div class="row requests-title"><h5>Hatdog ka?</h5></div>
+                {% endif %}
               </div>
+              {% endfor %}
             </div>
           </div>
           <!-- Profile and Notif Row -->
         </div>
-        <!-- SIDE KUAN BASTA KANANG KILID SA REQUEST FEED -->
-        <div class="col-3">
-          <div class="User-card">
-            <div class="user-img d-flex justify-content-center">
-              <a href="/account" class=" nav-link link light">
-              <img
-                class=""
-                id="avatar"
-                src="https://avatars.dicebear.com/api/avataaars/gay.svg?size=85&style=circle"
-              />
-              </a>
+        <!-- SIDE PROFILE KILID SA REQUEST FEED -->
+          <div class="col-3">
+            <div class="user-card">
+              <div class="user-card-body">
+              <div class="user-img d-flex justify-content-center py-3">
+                <a href="/account" class=" nav-link link light">
+                {% if user['userImg'] is none %}
+                  <img
+                  class="avatar"
+                  src="https://avatars.dicebear.com/api/avataaars/{{user['fname']}}{{user['lname']}}.svg?size=100&style=circle"
+                />
+                {% else %}
+                <img class="avatar" src="{{ user['userImg'] }}" />
+                {% endif %}
+                </a>
+              </div>
+              <div class="user-details d-flex justify-content-center mt-2">
+                <h2>{{user['fname']}} {{user['lname']}}</h2>
+              </div>
+              <div class="user-cc d-flex justify-content-center">
+                {% if user['course'] is none %}
+                <p>{{user['college']}}</p>
+                {% else %}
+                <p>{{user['college']}} - {{user['course']}}</p>
+                {% endif %}
+              </div>
+              <div class="user-requests py-2 d-flex">
+                <div class="col-8 created-request d-flex ms-2 my-2 p-2">
+                  <div class="cr-number p-1 align-self-center">
+                    <h3 class="ms-2">{{ crequest }}</h3>
+                  </div>
+                  <div class="cr-text p-1 align-self-center">
+                    <h5 class="m-0">Request Created</h5>
+                  </div>
+                </div>
+                <div class="col-4">
+                  Tae
+                </div>
+              </div>
             </div>
-            <div class="user-details d-flex justify-content-center">
-              <h2>Badingka?</h2>
-            </div>
-            <div class="user-cc d-flex justify-content-center">
-              <p>TABANG MGA LANGIT</p>
-            </div>
-            
-            
-
           </div>
         </div>
       </div>
@@ -217,7 +326,42 @@
     
   </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Script For Flash Message -->
+    <!-- Script for changing in Gcash Modal -->
+    <script>
+      const cashInBtn = document.getElementById("cash-in");
+      const cashOutBtn = document.getElementById("cash-out");
+      const cashInReq = document.getElementById("cash-in-req")
+      const cashOutReq = document.getElementById("cash-out-req")
+      const cashIndiv = document.getElementById("gcash-in-option")
+      const cashOutdiv = document.getElementById("gcash-out-option")
+      const GcashDiv = document.getElementById("gcash-option")
+
+      const SubmitBtn = document.getElementById("submit")
+      
+      cashInBtn.addEventListener("click", () => {
+        cashIndiv.style.display = "block";
+        SubmitBtn.style.display = "block";
+        GcashDiv.style.display = "none";
+      });
+
+      cashInReq.addEventListener("click", () => {
+        cashIndiv.style.display = "none";
+        SubmitBtn.style.display = "none";
+        GcashDiv.style.display = "block";
+      });
+
+      cashOutBtn.addEventListener("click", () => {
+        cashOutdiv.style.display = "block";
+        SubmitBtn.style.display = "block";
+        GcashDiv.style.display = "none";
+      });
+
+      cashOutReq.addEventListener("click", () => {
+        cashOutdiv.style.display = "none";
+        SubmitBtn.style.display = "none";
+        GcashDiv.style.display = "block";
+      });
+    </script>
     
     <!-- Script For Sidebar -->
     <script defer>

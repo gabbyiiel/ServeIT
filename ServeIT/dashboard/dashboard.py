@@ -4,7 +4,7 @@ from ServeIT import s3, S3_BUCKET, UPLOAD_FOLDER
 from ServeIT.auth.auth import login_required
 from ServeIT.models.dbUtils.UserRepo import UserRepo
 from ServeIT.models.dbUtils.ServicesRepo import Services
-from ServeIT.Services.forms.ServicesForm import ServicesForm
+from ServeIT.Services.forms.ServicesForm import PrintForm, GcashForm
 import cloudinary, cloudinary.uploader
 from cloudinary.uploader import upload
 import boto3, logging, os, tempfile
@@ -21,28 +21,30 @@ def dashboard():
     userID = session.get('user_id')
     data = UserRepo.get_current_user(userID)
     requestcount = Services.count_requests()
+    created_request = Services.count_user_requests(userID)
     title = 'Dashboard'
     fname = UserRepo.get_fname(userID)
-    form = ServicesForm()
+    pform = PrintForm()
+    gform = GcashForm()
     if data:
-        return render_template("dashboard/dashboard.html", rqlist=rqdata, title=title, fname=fname, form=form, user=data, rq=requestcount)
+        return render_template("dashboard/dashboard.html", rqlist=rqdata, title=title, fname=fname, pform=pform, gform=gform,user=data, rq=requestcount, crequest=created_request)
     else:
         return "Error: Could not retrieve user data"
 
 
-
-@bp_dashboard.route('/dashboard/add', methods=['GET', 'POST'])
+@bp_dashboard.route('/dashboard/add-print', methods=['GET', 'POST'])
 @login_required
 def add_print_request():
     userID = session.get('user_id')
     if request.method == 'POST':
-        form = ServicesForm()
+        form = PrintForm()
         if form.validate_on_submit():
             num_copies = form.num_copies.data
-            specification = form.specification.data
+            description = form.description.data
             location = form.location.data
             mop = request.form.get('MOP')
             order_status = "Listing"
+            print(num_copies, description, location,  mop)
             if form.printfile.data:
                 printfile_result = allowed_file(form.printfile.data.filename)
                 if printfile_result and printfile_result['code'] == 1:
@@ -58,7 +60,7 @@ def add_print_request():
                     service_name="PR"
                     Services.add_service(service_name)
                     Services.get_payment(mop)
-                    result = Services.add_printing(fileURL,num_copies,specification)
+                    result = Services.add_printing(fileURL,num_copies,description)
                     Services.add_request(userID, order_status, location)
                     if result is not None and result['code'] == -1:
                         flash(result['message'])
@@ -71,9 +73,45 @@ def add_print_request():
 
         else:
             flash("You are trying to access a forbidden URL.", "error")
+            for field, errors in form.errors.items():
+                for error in errors:
+                    print(f"Error in field {field}: {error}")
         return redirect(url_for('bp_dashboard.dashboard'))
-
-
+    
+@bp_dashboard.route('/dashboard/add-gcash', methods=['GET', 'POST'])
+@login_required
+def add_gcash_request():
+    userID = session.get('user_id')
+    if request.method == 'POST':
+        form = GcashForm()
+        gcash_type = ""
+        if request.form.get('cash-in'):
+            gcash_type = "cash-in"
+        else:
+            gcash_type = "cash-out"
+        print(gcash_type)
+        if form.validate_on_submit():
+            amount = int(form.amount.data)
+            print(amount)
+            phone_number = form.phone_number.data
+            location = form.location.data
+            mop = "COD"
+            order_status = "Listing"
+            Services.add_service("GC")
+            result = Services.add_gcash(gcash_type, amount, phone_number)
+            Services.add_request(userID, order_status, location)
+            Services.get_payment(mop)
+            if result is not None and result['code'] == -1:
+                flash(result['message'])
+            else:
+                return redirect(url_for('bp_dashboard.dashboard'))
+        else:
+            flash("You are trying to access a forbidden URL.", "error")
+            for field, errors in form.errors.items():
+                for error in errors:
+                    print(f"Error in field {field}: {error}")
+        return redirect(url_for('bp_dashboard.dashboard'))
+    
 ALLOWED_EXTENSIONS = {'docx', 'pdf', 'pptx'}
 def allowed_file(filename):
     try:

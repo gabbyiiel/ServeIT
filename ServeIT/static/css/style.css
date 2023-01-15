@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@700&family=Lexend:wght@400;500&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Lexend", sans-serif;
+  font-style: normal;
+  font-display: swap;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.logo-right-container {
+  width: auto;
+  position: fixed;
+  top: 50%;
+  right: 0;
+  background-color: #6d0a03;
+}
+
+.logo-right-img {
+  width: 65px;
+  height: auto;
+  padding-left: 15px;
+}
+
+.logo-right-container:hover img {
+  display: none;
+}
+
+.logo-right-container:hover .logo-right-text {
+  display: inline-block;
+}
+
+
+
+.logo-left-container {
+  width: auto;
+  background: #6d0a03;
+  position: fixed;
+  top: 50%;
+  left: 0;
+}
+.logo-left-img {
+  width: 180px;
+  height: auto;
+}
+
+
+.navbar {
+  background-color: #6D0A03;
+}
+
+.nav-item a {
+  font-family: "Jost";
+  font-style: normal;
+  font-size: 18px;
+  font-weight: 500;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.35);
+}
+
+.nav-item a:hover {
+  color: #FFCE85;
+}
+
+.container {
+  background-image: url("../img/backgrounds/patternbg.png");
+}
+
+.services-img {
+  width: 440px;
+  height: auto;
+}
+
+.services-text h2{
+  font-family: "Mitr";
+  font-size: 40px;
+  font-weight: 600;
+  color: #6D0A03;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.services-text p{
+  font-family: 'Lexend Deca';
+  font-size: 20px;
+  color: #424242;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.about-text h1 {
+  font-family: "Mitr";
+  font-size: 40px;
+  font-weight: 600;
+  color: #424242;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+/* To show the lines on right 
+  and left sides of the text */
+.divider::after,
+.divider::before {
+  content: "";
+  border: 0.5px solid rgb(0, 0, 0);
+  flex: 1;
+}
+
+/* Space on left and right sides of text */
+.divider:not(:empty)::before {
+  margin-right: 15px;
+  margin-left: 330px;
+}
+
+.divider:not(:empty)::after {
+  margin-left: 15px;
+  margin-right: 330px;
+}
+
+.divider p {
+  color: #424242;
+  font-family: "Mitr";
+  font-size: 25px;
+  font-weight: 600;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  margin: 0;
+}
+.os-text {
+  color: #424242;
+  font-family: "Mitr";
+  font-size: 20px;
+  font-weight: 500;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 0;
+}

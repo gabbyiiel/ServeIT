@@ -81,7 +81,7 @@ class Services:
                     'message': f'{e}'
                 }
     @staticmethod
-    def add_gcash(gcash_type, amount , description, phonenumber):
+    def add_gcash(gcash_type, amount , phonenumber):
         service_code = Services.get_service_code_name("SFGC")
         try:
             cur = mysql.connection.cursor()
@@ -97,8 +97,8 @@ class Services:
                 number_part = 1
             gcash_id = "SDGC" + str(number_part).zfill(4)
             cur.execute(f''' INSERT INTO `service_gcash`
-                        (`gcash_id`, `service_code`,`gcash_type`, `amount`, `description`, `phone_number`) 
-                        VALUES ('{gcash_id}','{service_code}','{gcash_type}', '{amount}', '{phonenumber}', '{description}')''')
+                        (`gcash_id`, `service_code`,`gcash_type`, `amount`,  `phone_number`) 
+                        VALUES ('{gcash_id}','{service_code}','{gcash_type}', '{amount}', '{phonenumber}')''')
             mysql.connection.commit()
             print("Gcash ADDED")
             return {
@@ -198,33 +198,19 @@ class Services:
         count = cur.fetchone()[0]
         return int(count)
     
+    #create a function to get the total amount of requests made by the user
     @staticmethod
-    def get_all_data_request():
-        data = {}
-        cur= mysql.connection.cursor(dictionary=True)
-        
-        cur.execute("SELECT * FROM requests")
-        data["requests"] = cur.fetchall()
-
-        cur.execute("SELECT * FROM payments")
-        data["payments"] = cur.fetchall()
-
-        cur.execute("SELECT * FROM service_print")
-        data["s_print"] = cur.fetchall()
-        cur.close()
-        return data
+    def count_user_requests(user_id):
+        cur = mysql.connection.cursor()
+        cur.execute(f"SELECT COUNT(*) FROM requests WHERE user_id = '{user_id}'")
+        count = cur.fetchone()[0]
+        return int(count)
     
     #create a function to get values of request_id, order_status, location, description, mode_of_payment, and user_id
     @staticmethod
     def display_request():
         cur = mysql.connection.cursor(dictionary=True)
-        cur.execute("SELECT `request_id`, `user_id`, `order_status`, `location` FROM requests")
-        requests = cur.fetchall()
-
-        cur.execute("SELECT mode_of_payment FROM payments")
-        payments = cur.fetchall()
-
-        cur.execute("SELECT description FROM service_print")
-        descriptions = cur.fetchall()
-        data = {'requests': requests, 'payments': payments, 'descriptions': descriptions}
+        cur.execute("SELECT r.request_id, u.user_id, s.service_name, p.mode_of_payment, r.order_status, r.location FROM requests r JOIN services s ON r.service_code = s.service_code JOIN payments p ON r.payment_id = p.payment_id JOIN users u ON r.user_id = u.user_id")
+        data = cur.fetchall()
         return data
+    

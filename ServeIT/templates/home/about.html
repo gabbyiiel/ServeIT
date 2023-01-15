@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="{{url_for('static', filename='img/logo/SDB_icon.png')}}">
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{title}}</title>
+    <!-- Bootstrap  -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <!-- CSS File -->
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+      <!-- navbar -->
+      {% include 'navbar.html' %} {% block content %}
+      {% endblock %}
+      <div class="container">
+        <div class="row about-text p-5">
+          <h1 class="text-center">Meet The Team!</h1>
+          <div class="divider mb-2 mt-3">
+            <p class="">OUR STORY</p>
+          </div>
+          <div class="row p-3">
+            <p class="os-text m-0 text-center">We are a group of students from MSU-IIT fascinated about the idea of creating solutions to campus problems such as lack of campus food delivery, printing station, etc. We are a team of problem solvers, developers, intellectuals who work around the clock to make studenDiri the most covenient and needed service platform of every students.</P>
+          </div>
+        </div>
+      </div>
+      <!-- LOGO LEFT -->
+      <a
+        class="logo-left-container p-2"
+        href="/"
+        style="z-index: 99999"
+      >
+        <img class="logo-left-img"
+        src={{url_for('static', filename='img/logo/SDW_logo.png')}}></a
+      >
+      <!-- LOGO RIGHT -->
+      <a
+        class="logo-right-container p-2"
+        style="z-index: 99999"
+      >
+        <img class="logo-right-img me-2" src={{url_for('static',
+        filename='img/logo/SD_icon.png')}}>
+        <!-- sign up and login box -->
+        <a class="logo-right-text" href="/login" style="display: none;">Login</a>
+        <a class="logo-right-text" href="/signup" style="display: none;">Sign up</a>
+      </a>
+  </body>
+</html>
+
