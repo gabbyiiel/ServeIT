@@ -75,9 +75,20 @@
             filename='img/icons/W_menu.png')}} id="btn"/>
           </li>
           <li class="nav-item">
-            <a href="/dashboard" class="nav-link">Dashboard</a>
+            <a href="/dashboard" class="nav-link">Food Delivery Service</a>
           </li>
         </ul>
       </header>
     </div>
   </body>
+  <script defer>
+    let sidebar = document.querySelector(".sidebar");
+    let closeBtn = document.querySelector("#btn");
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+      console.log(btn1);
+      console.log(sidebar);
+      console.log(sidebar.classList);
+    });
+  </script>
+</html>

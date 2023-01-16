@@ -100,7 +100,7 @@ def sign_up():
               form.gender.data = ""
             if form.username.errors:
               form.username.data = ""
-            return render_template("signup/signup.html", form=form, title=title, colleges=collegeList)
+            return render_template("signup/signup.html", form=form, title=title, colleges=collegeList, courselist=coursesList)
         else:
             return redirect('login')
     return render_template("signup/signup.html", form=form, title=title, collegelist=collegeList, courselist=coursesList)

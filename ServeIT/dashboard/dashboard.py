@@ -32,7 +32,7 @@ def dashboard():
         return render_template("dashboard/dashboard.html", rqlist=rqdata, title=title, fname=fname, pform=pform, gform=gform,user=data, rq=requestcount, crequest=created_request, urequest=user_request)
     else:
         return "Error: Could not retrieve user data"
-
+    
 
 @bp_dashboard.route('/dashboard/add-print', methods=['GET', 'POST'])
 @login_required
@@ -79,6 +79,15 @@ def add_print_request():
                 for error in errors:
                     print(f"Error in field {field}: {error}")
         return redirect(url_for('bp_dashboard.dashboard'))
+    
+@bp_dashboard.route('/food-services', methods=['GET', 'POST'])
+@login_required
+def add_food_request():
+    title = 'Food Services'
+    userID = session.get('user_id')
+    
+    return render_template("dashboard/S_food.html", title=title)
+
     
 @bp_dashboard.route('/dashboard/add-gcash', methods=['GET', 'POST'])
 @login_required
