@@ -22,12 +22,14 @@ def dashboard():
     data = UserRepo.get_current_user(userID)
     requestcount = Services.count_requests()
     created_request = Services.count_user_requests(userID)
+    user_request = Services.get_user_requests(userID)
+    print(user_request)
     title = 'Dashboard'
     fname = UserRepo.get_fname(userID)
     pform = PrintForm()
     gform = GcashForm()
     if data:
-        return render_template("dashboard/dashboard.html", rqlist=rqdata, title=title, fname=fname, pform=pform, gform=gform,user=data, rq=requestcount, crequest=created_request)
+        return render_template("dashboard/dashboard.html", rqlist=rqdata, title=title, fname=fname, pform=pform, gform=gform,user=data, rq=requestcount, crequest=created_request, urequest=user_request)
     else:
         return "Error: Could not retrieve user data"
 

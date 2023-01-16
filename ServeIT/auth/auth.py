@@ -69,12 +69,13 @@ def sign_up():
         lname = form.lname.data
         email = form.email.data
         college = request.form.get('college')
+        course = request.form.get('course')
         idnumber = form.idnumber.data
         password = form.password.data
         gender = form.gender.data
         username = form.username.data
         # call signup function and check if it returns an error
-        result = UserRepo.signup(username, idnumber, fname, lname, email, college, password, gender)
+        result = UserRepo.signup(username, idnumber, fname, lname, email, college, course, password, gender)
         if result['code'] == -1:
             flash(result['message'])
             # Keep the inputted form data and clear the invalid input fields
@@ -102,4 +103,4 @@ def sign_up():
             return render_template("signup/signup.html", form=form, title=title, colleges=collegeList)
         else:
             return redirect('login')
-    return render_template("signup/signup.html", form=form, title=title, colleges=collegeList)
+    return render_template("signup/signup.html", form=form, title=title, collegelist=collegeList, courselist=coursesList)

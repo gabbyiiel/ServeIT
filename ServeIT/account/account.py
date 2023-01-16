@@ -36,7 +36,6 @@ def settings():
     data = UserRepo.get_current_user(userID)
     ucollege = College.get_user_college(data['college'])
     ucourse= College.get_user_course(data['course'])
-    print(ucourse)
     collegelist = College.college_retrieveAll()
     courselist = College.courses_retrieveAll()
     if bform.validate_on_submit() and request.method == 'POST':

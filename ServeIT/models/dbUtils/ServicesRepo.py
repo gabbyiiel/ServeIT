@@ -206,6 +206,15 @@ class Services:
         count = cur.fetchone()[0]
         return int(count)
     
+    #create a function to get all the requests made by the user 
+    @staticmethod
+    def get_user_requests(user_id):
+        cur = mysql.connection.cursor(dictionary=True)
+        query = "SELECT services.service_name, requests.order_status FROM services JOIN requests ON services.service_code = requests.service_code WHERE requests.user_id = %s"
+        cur.execute(query, (user_id,))
+        data = cur.fetchall()
+        return data
+    
     #create a function to get values of request_id, order_status, location, description, mode_of_payment, and user_id
     @staticmethod
     def display_request():

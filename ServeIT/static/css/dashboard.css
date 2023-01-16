@@ -591,3 +591,44 @@ h3 {
 .cr-text h5 {
   font-size: 16px;
 }
+
+.dropdown-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #fffbf4;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+}
+
+.dropdown-btn:hover {
+  background-color: #faf0e0;
+}
+
+.dropdown-btn img{
+  width: 35px;
+  height: auto;
+}
+.flip {
+  transform: rotate(180deg);
+  transition: all 0.5s ease;
+}
+.user-c-requests {
+  background-color: #6d0a03;
+  
+}
+.card.c-request {
+  background-color: #fffdf9;
+  border: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.089);
+  border-radius: 15px;
+}
+.c-request-body h5 {
+  font-size: 16px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.c-request-body p {
+  font-size: 12px;
+  color: #424242;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}

@@ -57,7 +57,7 @@ class UserRepo:
             }
 
     @staticmethod
-    def signup(username, idnumber, fname, lname, email, college, password, gender):
+    def signup(username, idnumber, fname, lname, email, college, course, password, gender):
         cur = mysql.connection.cursor()
         # Retrieve the maximum value of the user_id column
         cur.execute("SELECT MAX(user_id) FROM users")
@@ -76,7 +76,7 @@ class UserRepo:
 
         # validate email
         if not re.match(r'^[\w.-]+@[\w.-]+(\.[\w.-]+)+$', email):
-            return {'code': -1, 'message': 'Email is already taken'}
+            return {'code': -1, 'message': 'Invalid email address format'}
         # validate password
         if not re.match(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$', password):
             return {'code': -1, 'message': 'The password must be at least 8 characters long and can contain only letters, digits and special characters'}
@@ -91,9 +91,15 @@ class UserRepo:
         user = cur.fetchone()
         if user is not None:
             return {'code': -1, 'message': 'Email is already taken'}
+        
+        cur.execute(f'SELECT * FROM users WHERE idnumber = "{idnumber}"')
+        idnum = cur.fetchone()
+        if idnum is not None:
+            return {'code': -1, 'message': 'ID Number is already taken'}
+        
         try:
-            cur.execute(f''' INSERT INTO `users`(`user_id`, `username`, `idnumber`, `fname`, `lname`, `email`, `college`, `password`, `gender`) VALUES
-                        ('{user_id}','{username}','{idnumber}','{fname}','{lname}','{email}','{college}','{password}','{gender}')
+            cur.execute(f''' INSERT INTO `users`(`user_id`, `username`, `idnumber`, `fname`, `lname`, `email`, `college`, `course`, `password`, `gender`) VALUES
+                        ('{user_id}','{username}','{idnumber}','{fname}','{lname}','{email}','{college}', '{course}', '{password}','{gender}')
                         ''')
             mysql.connection.commit()
             return {

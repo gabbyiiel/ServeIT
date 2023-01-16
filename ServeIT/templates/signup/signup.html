@@ -66,15 +66,20 @@
               </div>
               <!-- id number, college, course input-->
               <div class="row">
-                <div class="col-12 col-md-6 mb-2">
+                <div class="col-12 col-md-4 mb-2">
                   {{ form.idnumber(class_='form-control', placeholder='Id Number')}}
                 </div>
-                <div class="col-12 col-md-6 mb-2">
-                  <select name="college" class="form-control selectpicker" required>
-                    <option selected disabled value="">College</option>
-                    {% for college in colleges %}
+                <div class="col-12 col-md-4 mb-2">
+                  <select id="college" name="college" class="form-control selectpicker" required>
+                    <option selected disabled value="">Select College</option>
+                    {% for college in collegelist %}
                     <option value="{{ college['collegeCode'] }}">{{ college['collegeName'] }}</option>
                     {% endfor %}
+                  </select>
+                </div>
+                <div class="col-12 col-md-4 mb-2">
+                  <select id="course" name="course" class="form-control selectpicker" required>
+                    <option selected disabled value="">Select Course</option>
                   </select>
                 </div>
               </div>
@@ -132,7 +137,6 @@
       crossorigin="anonymous"
     ></script>
     
-  <script src="{{url_for('static', filename='js/signup-select.js') }}" defer> </script>
   {% with messages = get_flashed_messages() %}
   {% if messages %}
     <script>
@@ -163,4 +167,25 @@
     {% endif %}
     {% endwith %}
   </body>
+  <script>
+    // Get the elements
+    var courselist = {{ courselist|tojson|safe }};
+    const collegeSelect = document.getElementById("college");
+    const courseSelect = document.getElementById("course");
+  
+    collegeSelect.addEventListener("change", e => {
+      // Clear options of courseSelect
+      courseSelect.innerHTML = '<option selected disabled value="">Select Course</option>';
+  
+      // Get the selected college code
+      const selectedCollegeCode = e.target.value;
+  
+      // Add options of courses that belong to the selected college
+      for (let i = 0; i < courselist.length; i++) {
+        if (courselist[i]['collegeCode'] === selectedCollegeCode) {
+          courseSelect.innerHTML += `<option value="${courselist[i]['courseCode']}">${courselist[i]['courseName']}</option>`;
+        }
+      }
+    });
+  </script>
 </html>
