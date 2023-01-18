@@ -2,7 +2,6 @@ from flask import Flask
 from config import DB_HOST, DB_NAME, DB_USER, DB_PASS, SECRET_KEY, S3_BUCKET, S3_KEY, S3_SECRET, UPLOAD_FOLDER
 from config import CLOUD_NAME, API_KEY, API_SECRET
 from flask_mysql_connector import MySQL
-from flask_bootstrap import Bootstrap
 from flask_wtf.csrf import CSRFProtect
 import cloudinary
 import cloudinary.uploader
@@ -34,7 +33,6 @@ def create_app(test_app=None):
         api_secret = API_SECRET,
         )
     CSRFProtect(app)
-    Bootstrap(app)
     #import blueprints
     from .auth import bp_auth
     from .dashboard import bp_dashboard
