@@ -29,86 +29,35 @@
               class="col-4 gcash-selection mt-2 justify-content-center align-self-center"
               id="gcash-option"
             >
-            <form
-                action="{{ url_for('bp_dashboard.add_gcash_request') }}"
-                method="POST"
-                enctype="multipart/form-data"
-              >
-              <div class="row m-2">
-                <input
-                  type="submit"
-                  class="btn gcash-btn"
-                  id="cash-in"
-                  value="Cash-in"
-                />
-              </div>
-              <div class="row m-2">
-                <input
-                  type="submit"
-                  class="btn gcash-btn"
-                  id="cash-out"
-                  value="Cash-out"
-                />
-              </div>
-            </div>
-            <div
-              class="col-4 mt-2 justify-content-center align-self-center"
-              id="gcash-in-option"
-              style="display: none"
-            >
-              
-                {{ gform.hidden_tag() }}
-                <div class="row m-2 gcash-header p-3">
-                  <button type="button" class="btn gcash-btn" id="cash-in-req">
-                    Cash-in Request
-                  </button>
-                </div>
-                <div class="row m-2">
-                  {{ gform.phone_number(class_='form-control gcash-number',
-                  placeholder='Phone Number') }}
-                </div>
-                <div class="row m-2">
-                  {{ gform.amount(class_='form-control gcash-amount',
-                  placeholder='Amount') }}
-                </div>
-                <div class="row m-2">
-                  {{ gform.location(class_='form-control gcash-amount',
-                  placeholder='Location') }}
-                </div>
-                <div class="row paymentinfo mt-3">
-                  <div class="row">
-                    <p class="payment-text mx-auto text-center my-2">
-                      Total payment may vary on the requested service
-                    </p>
-                  </div>
-                  <div class="row">
-                    <div
-                      class="col d-flex align-items-center my-2"
-                      id="submit-btn"
-                    >
-                      <button class="btn d-flex mx-auto p-2" id="submit">
-                        {{gform.submit(class_='btn', value='Submit Request') }}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div
-              class="col-4 mt-2 justify-content-center align-self-center"
-              id="gcash-out-option"
-              style="display: none"
-            >
               <form
                 action="{{ url_for('bp_dashboard.add_gcash_request') }}"
                 method="POST"
                 enctype="multipart/form-data"
               >
                 {{ gform.hidden_tag() }}
-                <div class="row m-2 gcash-header p-3">
-                  <button type="button" class="btn gcash-btn" id="cash-out-req">
-                    Cash-Out Request
-                  </button>
+                <div class="row m-2 gcash-header p-2">
+                  <div class="col">
+                    <button
+                      type="button"
+                      class="btn gcash-btn"
+                      value="cash-in"
+                      id="cash-in-req"
+                      onclick="getValue(this);changeStyle(this)"
+                    >
+                      Cash-in
+                    </button>
+                  </div>
+                  <div class="col">
+                    <button
+                      type="button"
+                      class="btn gcash-btn"
+                      value="cash-out"
+                      id="cash-in-req"
+                      onclick="getValue(this);changeStyle(this)"
+                    >
+                      Cash-out
+                    </button>
+                  </div>
                 </div>
                 <div class="row m-2">
                   {{ gform.phone_number(class_='form-control gcash-number',
@@ -133,6 +82,11 @@
                       class="col d-flex align-items-center my-2"
                       id="submit-btn"
                     >
+                      <input
+                        type="hidden"
+                        id="selectedValue"
+                        name="selectedValue"
+                      />
                       <button class="btn d-flex mx-auto p-2" id="submit">
                         {{gform.submit(class_='btn', value='Submit Request') }}
                       </button>

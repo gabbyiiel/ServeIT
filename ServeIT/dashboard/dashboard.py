@@ -33,6 +33,17 @@ def dashboard():
     else:
         return "Error: Could not retrieve user data"
     
+@bp_dashboard.route('/dashboard/accept', methods=['POST'])
+@login_required
+def accept_request():
+    userID = session.get('user_id')
+    if request.method == 'POST':
+        request_id = request.form.get('accept')
+        print(request_id)
+        if request.form.get('accept'):
+            Services.accept_request(request_id, userID)
+        return redirect(url_for('bp_dashboard.dashboard'))
+    
 
 @bp_dashboard.route('/dashboard/add-print', methods=['GET', 'POST'])
 @login_required
@@ -59,8 +70,7 @@ def add_print_request():
                         upload_FileS3(filepath)
                         fileURL = os.path.basename(filepath)
                         os.remove(filepath)
-                    service_name="PR"
-                    Services.add_service(service_name)
+                    Services.add_service("PR")
                     Services.get_payment(mop)
                     result = Services.add_printing(fileURL,num_copies,description)
                     Services.add_request(userID, order_status, location)
@@ -72,7 +82,6 @@ def add_print_request():
                 elif printfile_result:
                     flash(printfile_result['message'])
             return redirect(url_for('bp_dashboard.dashboard'))
-
         else:
             flash("You are trying to access a forbidden URL.", "error")
             for field, errors in form.errors.items():
@@ -95,15 +104,9 @@ def add_gcash_request():
     userID = session.get('user_id')
     if request.method == 'POST':
         form = GcashForm()
-        gcash_type = ""
-        if request.form.get('cash-in'):
-            gcash_type = "cash-in"
-        else:
-            gcash_type = "cash-out"
-        print(gcash_type)
+        gcash_type = request.form['selectedValue']
         if form.validate_on_submit():
             amount = int(form.amount.data)
-            print(amount)
             phone_number = form.phone_number.data
             location = form.location.data
             mop = "COD"

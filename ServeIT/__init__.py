@@ -37,10 +37,12 @@ def create_app(test_app=None):
     from .auth import bp_auth
     from .dashboard import bp_dashboard
     from .account import bp_acc
+    from .request_feed import bp_reqfeed
     #register blueprints
     app.register_blueprint(bp_auth)
     app.register_blueprint(bp_dashboard)
     app.register_blueprint(bp_acc)
+    app.register_blueprint(bp_reqfeed)
     # run_with_ngrok(app)
     return app
     

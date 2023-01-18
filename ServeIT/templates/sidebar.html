@@ -1,0 +1,44 @@
+<link rel="stylesheet" href={{url_for('static', filename='css/sidebar.css')}} />
+<div class="sidebar">
+  <div class="logo-details">
+    <img class="sb-sd-logo closed" id="logo" src={{url_for('static',
+    filename='img/logo/SDB_icon.png')}}>
+  </div>
+  <ul class="nav-list p-0">
+    <li>
+      <a href="/dashboard">
+        <i class="bx bxs-dashboard"></i>
+        <span class="links_name">Dashboard</span>
+      </a>
+      <span class="tooltip">Dashboard</span>
+    </li>
+    <li>
+      <a href="/request-feed">
+        <i class="bx bx-list-ul"></i>
+        <span class="links_name">Request Feed</span>
+      </a>
+      <span class="tooltip">Request Feed</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class="bx bx-history"></i>
+        <span class="links_name">Request History</span>
+      </a>
+      <span class="tooltip">Request History</span>
+    </li>
+    <li>
+      <a href="/account">
+        <i class="bx bx-user-circle"></i>
+        <span class="links_name">Account</span>
+      </a>
+      <span class="tooltip">Account</span>
+    </li>
+    <li>
+      <a href="/logout">
+        <i class="bx bx-log-out" id="log_out"></i>
+        <span class="links_name">Logout</span>
+      </a>
+      <span class="tooltip">Logout</span>
+    </li>
+  </ul>
+</div>

@@ -36,6 +36,29 @@ class Services:
                     'code': -1,
                     'message': f'{e}'
                 }
+    @staticmethod
+    #create a function named accept_request update the order status and insert value into date_accepted and user_id_accept of the current user the, get the request id and update the request table
+    def accept_request(request_id, user_id):
+        try:
+            cur = mysql.connection.cursor()
+            cur.execute(f''' UPDATE requests
+                        SET order_status = 'Accepted', date_accepted = NOW(), user_id_accept = '{user_id}'
+                        WHERE request_id = '{request_id}' ''')
+            mysql.connection.commit()
+            print("Request " + request_id + " Accepted by:" + user_id)
+            return {
+                'code': 1,
+                'message': 'Request Accepted'
+            }
+        except Exception as e:
+                print(e)
+                return {
+                    'code': -1,
+                    'message': f'{e}'
+                }
+
+
+
 
     @staticmethod
     def get_service_code():
@@ -134,7 +157,7 @@ class Services:
                         (`service_code`, `service_name`)
                         VALUES ('{service_code}', '{service_name}')''')
             mysql.connection.commit()
-            print(service_code, service_name, "SERVICES ADDED")
+            print(service_code, service_name, "Service Added")
             return {
                 'code': 1,
                 'message': 'Services Added' }

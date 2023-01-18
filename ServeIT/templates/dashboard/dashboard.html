@@ -4,16 +4,17 @@
     <title>{{ title }}</title>
     <link rel="icon" href={{url_for('static', filename='img/logo/SDB_icon.png')}}>
     <meta charset="UTF-8" />
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href={{url_for('static',
     filename='css/dashboard.css')}} />
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Boxicons CDN Link -->
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
@@ -22,50 +23,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
+    {% include 'dashboard/CreateModal.html' %}
     <!-- SIDEBAR -->
-    <div class="sidebar">
-      <div class="logo-details">
-        <img class="sb-sd-logo closed" id="logo" src={{url_for('static',
-        filename='img/logo/SDB_icon.png')}}>
-      </div>
-      <ul class="nav-list p-0">
-        <li>
-          <a href="/dashboard">
-            <i class="bx bxs-dashboard"></i>
-            <span class="links_name">Dashboard</span>
-          </a>
-          <span class="tooltip">Dashboard</span>
-        </li>
-        <li>
-          <a href="#">
-            <i class="bx bx-list-ul"></i>
-            <span class="links_name">Request Feed</span>
-          </a>
-          <span class="tooltip">Request Feed</span>
-        </li>
-        <li>
-          <a href="#">
-            <i class="bx bx-history"></i>
-            <span class="links_name">Request History</span>
-          </a>
-          <span class="tooltip">Request History</span>
-        </li>
-        <li>
-          <a href="/account">
-            <i class="bx bx-user-circle"></i>
-            <span class="links_name">Account</span>
-          </a>
-          <span class="tooltip">Account</span>
-        </li>
-        <li>
-          <a href="/logout">
-            <i class="bx bx-log-out" id="log_out"></i>
-            <span class="links_name">Logout</span>
-          </a>
-          <span class="tooltip">Logout</span>
-        </li>
-      </ul>
-    </div>
+    {% include 'sidebar.html' %}
     <!-- TODO FIX ERROR MODAL -->
     <!-- <div class="modal fade" id="flashModal" tabindex="-1" role="dialog" aria-labelledby="flashModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -139,7 +99,7 @@
                       Total Request
                     </h3>
                   </div>
-                
+                  
                   <div class="TR-icon">
                     <img src={{url_for('static',
                     filename='img/icons/B_Task.png')}} alt="tr-icon">
@@ -181,97 +141,102 @@
                 </div>
               </div>
               {% for request in rqlist %}
-                {% if request['service_name'] == 'SFPR' %}
-                <div class="row RF-card-requests p-2" >
-                  <div class="col-8" >
-                    <div class="row requests-title mt-2"> 
-                      <h4>Printing Request</h4>
+                {% if request['order_status'] == 'Listing' %}
+                  {% if request['service_name'] == 'SFPR'%}
+                  <div class="row RF-card-requests p-2" >
+                    <div class="col-8" >
+                      <div class="row requests-title mt-2"> 
+                        <h4>Printing Request</h4>
+                      </div>
+                      <div class="row request-info ">
+                        <h5>{{ request['request_id'] }} - {{ request['location'] }}</h5>
+                      </div>
+                      <div class="row request-description">
+                        <h6>{{ request['description'] }} </h6>
+                      </div>
                     </div>
-                    <div class="row request-info ">
-                      <h5>{{ request['request_id'] }} - {{ request['location'] }}</h5>
+                    {% if request['user_id'] == user['user_id'] %}
+                    <div class="col-4 d-flex justify-content-center align-self-center" >
+                      <button type="button" class="btn accept-request " disabled>
+                        Listing
+                      </button>
                     </div>
-                    <div class="row request-description">
-                      <h6>{{ request['description'] }} </h6>
+                    {% else %}
+                    <div class="col-4 d-flex justify-content-center align-self-center" >
+                      <form action="{{ url_for('bp_dashboard.accept_request') }}" method="POST">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                          <button type="submit" name="accept" value="{{ request['request_id'] }}" class="btn accept-request mx-2">
+                            Accept
+                          </button>
+                          <button type="submit" name="bookmark" value="bookmark" class="btn bookmark-request">
+                            <img src={{url_for('static', filename='img/icons/R_bookmark.png')}} alt="bookmark">
+                          </button>
+                      </form>
                     </div>
-                  </div>
-                  {% if request['user_id'] == user['user_id'] %}
-                  <div class="col-4 d-flex justify-content-center align-self-center" >
-                    <button type="button" class="btn accept-request " disabled>
-                      Listing
-                    </button>
-                  </div>
+                    {% endif %}
+                  {% elif request['service_name'] == 'SFGC' %}
+                  <div class="row RF-card-requests p-2" >
+                    <div class="col-8" >
+                      <div class="row requests-title mt-2"> 
+                        <h4>Gcash Request</h4>
+                      </div>
+                      <div class="row request-info ">
+                        <h5>{{ request['request_id'] }} - {{ request['location'] }}</h5>
+                      </div>
+                      <div class="row request-description">
+                        <h6>{{ request['description'] }} </h6>
+                      </div>
+                    </div>
+                    {% if request['user_id'] == user['user_id'] %}
+                    <div class="col-4 d-flex justify-content-center align-self-center" >
+                      <button type="button" class="btn accept-request " disabled>
+                        Listing
+                      </button>
+                    </div>
+                    {% else %}
+                    <div class="col-4 d-flex justify-content-center align-self-center" >
+                      <button type="button" class="btn accept-request mx-2">
+                        Accept
+                      </button>
+                      <button type="button" class="btn later-request">
+                        Later
+                      </button>
+                    </div>
+                    {% endif %}
+                  {% elif request['service_name'] == 'SFFDS' %}
+                  <div class="row RF-card-requests p-2" >
+                    <div class="col-8" >
+                      <div class="row requests-title mt-2"> 
+                        <h4>Food Request</h4>
+                      </div>
+                      <div class="row request-info ">
+                        <h5>{{ request['request_id'] }} - {{ request['location'] }}</h5>
+                      </div>
+                      <div class="row request-description">
+                        <h6>{{ request['description'] }} </h6>
+                      </div>
+                    </div>
+                    {% if request['user_id'] == user['user_id'] %}
+                    <div class="col-4 d-flex justify-content-center align-self-center" >
+                      <button type="button" class="btn accept-request " disabled>
+                        Listing
+                      </button>
+                    </div>
+                    {% else %}
+                    <div class="col-4 d-flex justify-content-center align-self-center" >
+                      <button type="button" class="btn accept-request mx-2">
+                        Accept
+                      </button>
+                      <button type="button" class="btn later-request">
+                        Later
+                      </button>
+                    </div>
+                    {% endif %}
                   {% else %}
-                  <div class="col-4 d-flex justify-content-center align-self-center" >
-                    <button type="button" class="btn accept-request mx-2">
-                      Accept
-                    </button>
-                    <button type="button" class="btn later-request">
-                      Later
-                    </button>
-                  </div>
+                  <div class="row requests-title"><h5>Hatdog ka?</h5></div>
                   {% endif %}
-                {% elif request['service_name'] == 'SFGC' %}
-                <div class="row RF-card-requests p-2" >
-                  <div class="col-8" >
-                    <div class="row requests-title mt-2"> 
-                      <h4>Gcash Request</h4>
-                    </div>
-                    <div class="row request-info ">
-                      <h5>{{ request['request_id'] }} - {{ request['location'] }}</h5>
-                    </div>
-                    <div class="row request-description">
-                      <h6>{{ request['description'] }} </h6>
-                    </div>
-                  </div>
-                  {% if request['user_id'] == user['user_id'] %}
-                  <div class="col-4 d-flex justify-content-center align-self-center" >
-                    <button type="button" class="btn accept-request " disabled>
-                      Listing
-                    </button>
-                  </div>
-                  {% else %}
-                  <div class="col-4 d-flex justify-content-center align-self-center" >
-                    <button type="button" class="btn accept-request mx-2">
-                      Accept
-                    </button>
-                    <button type="button" class="btn later-request">
-                      Later
-                    </button>
-                  </div>
-                  {% endif %}
-                {% elif request['service_name'] == 'SFFDS' %}
-                <div class="row RF-card-requests p-2" >
-                  <div class="col-8" >
-                    <div class="row requests-title mt-2"> 
-                      <h4>Food Request</h4>
-                    </div>
-                    <div class="row request-info ">
-                      <h5>{{ request['request_id'] }} - {{ request['location'] }}</h5>
-                    </div>
-                    <div class="row request-description">
-                      <h6>{{ request['description'] }} </h6>
-                    </div>
-                  </div>
-                  {% if request['user_id'] == user['user_id'] %}
-                  <div class="col-4 d-flex justify-content-center align-self-center" >
-                    <button type="button" class="btn accept-request " disabled>
-                      Listing
-                    </button>
-                  </div>
-                  {% else %}
-                  <div class="col-4 d-flex justify-content-center align-self-center" >
-                    <button type="button" class="btn accept-request mx-2">
-                      Accept
-                    </button>
-                    <button type="button" class="btn later-request">
-                      Later
-                    </button>
-                  </div>
-                  {% endif %}
-                {% else %}
-                <div class="row requests-title"><h5>Hatdog ka?</h5></div>
-                {% endif %}
               </div>
+              {% endif %}
               {% endfor %}
             </div>
           </div>
@@ -306,17 +271,24 @@
               <div class="user-requests py-2 d-flex">
                 <div class="col-8 created-request d-flex ms-3 my-2 p-2">
                   <div class="cr-number p-1 align-self-center">
-                    <h3 class="ms-2">{{ crequest }}</h3>
+                    <h3 class="ms-2 mb-0">{{ crequest }}</h3>
                   </div>
                   <div class="cr-text p-1 align-self-center">
                     <h5 class="m-0">Request Created</h5>
                   </div>
                 </div>
                 <div class="col d-flex align-self-center justify-content-center ">
+                  {% if not crequest %}
+                  <button class="btn dropdown-btn0 p-0">
+                    <img class="d-flex m-auto"src={{url_for('static',
+                    filename='img/icons/B_ddown.png')}} alt="dropdown-btn">
+                  </button>
+                  {% else %}
                   <button class="btn dropdown-btn p-0">
                     <img class="d-flex m-auto"src={{url_for('static',
                     filename='img/icons/B_ddown.png')}} alt="dropdown-btn">
                   </button>
+                  {% endif %}
                 </div>
               </div>
               <div class="user-c-requests p-2" style="display: none;">
@@ -335,7 +307,31 @@
                   </div>
                 </div>
                 {% elif request['service_name'] == 'SFGC' %}
+                <div class="card c-request mt-2">
+                  <div class="c-request-body card-body">
+                    <div class="row">
+                      <div class="col-8 text-center align-self-center"> 
+                        <h5 class="m-0">Gcash Request</h5>
+                      </div>
+                      <div class="col align-self-center text-center"> 
+                        <p class="m-0">{{request['order_status']}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 {% elif request['service_name'] == 'SFFDS' %}
+                <div class="card c-request mt-2">
+                  <div class="c-request-body card-body">
+                    <div class="row">
+                      <div class="col-8 text-center align-self-center"> 
+                        <h5 class="m-0">Food Request</h5>
+                      </div>
+                      <div class="col align-self-center text-center"> 
+                        <p class="m-0">{{request['order_status']}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 {% endif %}
                 {% endfor %}
               </div>
@@ -345,45 +341,26 @@
       </div>
 
     </div>
-    {% include 'dashboard/CreateModal.html' %}
+ 
     
   </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Script for changing in Gcash Modal -->
+    <!-- Script for getting gcashtype  in Gcash Modal -->
     <script>
-      const cashInBtn = document.getElementById("cash-in");
-      const cashOutBtn = document.getElementById("cash-out");
-      const cashInReq = document.getElementById("cash-in-req")
-      const cashOutReq = document.getElementById("cash-out-req")
-      const cashIndiv = document.getElementById("gcash-in-option")
-      const cashOutdiv = document.getElementById("gcash-out-option")
-      const GcashDiv = document.getElementById("gcash-option")
+      var selectedButton = null;
 
-      const SubmitBtn = document.getElementById("submit")
-      
-      cashInBtn.addEventListener("click", () => {
-        cashIndiv.style.display = "block";
-        SubmitBtn.style.display = "block";
-        GcashDiv.style.display = "none";
-      });
+      function getValue(element) {
+        var selectedValue = element.value;
+        document.getElementById("selectedValue").value = selectedValue;
+      }
 
-      cashInReq.addEventListener("click", () => {
-        cashIndiv.style.display = "none";
-        SubmitBtn.style.display = "none";
-        GcashDiv.style.display = "block";
-      });
-
-      cashOutBtn.addEventListener("click", () => {
-        cashOutdiv.style.display = "block";
-        SubmitBtn.style.display = "block";
-        GcashDiv.style.display = "none";
-      });
-
-      cashOutReq.addEventListener("click", () => {
-        cashOutdiv.style.display = "none";
-        SubmitBtn.style.display = "none";
-        GcashDiv.style.display = "block";
-      });
+      function changeStyle(element) {
+        if (selectedButton) {
+          selectedButton.classList.remove("selected");
+        }
+        element.classList.add("selected");
+        selectedButton = element;
+      }
     </script>
     
     <!-- Script For Sidebar -->
@@ -392,9 +369,6 @@
       let closeBtn = document.querySelector("#btn");
       closeBtn.addEventListener("click", () => {
         sidebar.classList.toggle("open");
-        console.log(btn1);
-        console.log(sidebar);
-        console.log(sidebar.classList);
       });
     </script>
 
