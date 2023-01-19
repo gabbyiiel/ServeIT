@@ -229,6 +229,14 @@ class Services:
         count = cur.fetchone()[0]
         return int(count)
     
+    #create a function to get the total amount of accepted request made by the user
+    @staticmethod
+    def count_user_accepted_requests(user_id):
+        cur = mysql.connection.cursor()
+        cur.execute(f"SELECT COUNT(*) FROM requests WHERE user_id_accept = '{user_id}' AND order_status = 'Accepted'")
+        count = cur.fetchone()[0]
+        return int(count)
+    
     #create a function to get all the requests made by the user 
     @staticmethod
     def get_user_requests(user_id):
@@ -242,7 +250,19 @@ class Services:
     @staticmethod
     def display_request():
         cur = mysql.connection.cursor(dictionary=True)
-        cur.execute("SELECT r.request_id, u.user_id, s.service_name, p.mode_of_payment, r.order_status, r.location FROM requests r JOIN services s ON r.service_code = s.service_code JOIN payments p ON r.payment_id = p.payment_id JOIN users u ON r.user_id = u.user_id")
+        cur.execute("SELECT r.request_id, u.user_id, s.service_name, p.mode_of_payment, r.order_status, r.location, r.user_id_accept, g.gcash_type, g.amount, g.phone_number, pr.file, pr.number_of_copies, pr.description FROM requests r JOIN services s ON r.service_code = s.service_code JOIN payments p ON r.payment_id = p.payment_id JOIN users u ON r.user_id = u.user_id LEFT JOIN service_gcash g ON r.service_code = g.service_code LEFT JOIN service_print pr ON r.service_code = pr.service_code;")
         data = cur.fetchall()
         return data
+    
+    #create a function to delete the request row based on request_id
+    @staticmethod
+    def remove_request(request_id):
+        cur = mysql.connection.cursor()
+        cur.execute(f"DELETE FROM service_print WHERE service_code = (SELECT service_code FROM requests WHERE request_id = '{request_id}')")
+        cur.execute(f"DELETE FROM service_gcash WHERE service_code = (SELECT service_code FROM requests WHERE request_id = '{request_id}')")
+        cur.execute(f"DELETE FROM services WHERE service_code = (SELECT service_code FROM requests WHERE request_id = '{request_id}')")
+        cur.execute(f"DELETE FROM payments WHERE payment_id = (SELECT payment_id FROM requests WHERE request_id = '{request_id}')")
+        cur.execute(f"DELETE FROM requests WHERE request_id = '{request_id}'")
+        mysql.connection.commit()
+        print("REQUEST DELETED")
     

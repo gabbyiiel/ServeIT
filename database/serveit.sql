@@ -91,6 +91,7 @@ CREATE TABLE `payments` (
 
 LOCK TABLES `payments` WRITE;
 /*!40000 ALTER TABLE `payments` DISABLE KEYS */;
+INSERT INTO `payments` VALUES ('SDPY0001',NULL,'COD'),('SDPY0002',NULL,'COD'),('SDPY0003',NULL,'COD'),('SDPY0004',NULL,'COD'),('SDPY0005',NULL,'COD'),('SDPY0006',NULL,'COD'),('SDPY0007',NULL,'COD');
 /*!40000 ALTER TABLE `payments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,7 +104,7 @@ DROP TABLE IF EXISTS `requests`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `requests` (
   `request_id` varchar(50) NOT NULL,
-  `user_id` varchar(50) NOT NULL,
+  `user_id` varchar(50) DEFAULT NULL,
   `service_code` varchar(50) NOT NULL,
   `order_status` varchar(50) NOT NULL,
   `order_date` varchar(50) NOT NULL,
@@ -116,10 +117,10 @@ CREATE TABLE `requests` (
   KEY `FK_user_id-users_idx` (`user_id`),
   KEY `request_services_code_idx` (`service_code`),
   KEY `FK_payment_id-payment_idx` (`payment_id`),
-  CONSTRAINT `FK_payment_id-payment` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`payment_id`),
-  CONSTRAINT `FK_service_code-services` FOREIGN KEY (`service_code`) REFERENCES `services` (`service_code`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `FK_user_id-users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `FK_user_id_accept-users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `FK_payment_id-payment` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`payment_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_service_code-services` FOREIGN KEY (`service_code`) REFERENCES `services` (`service_code`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_user_id-users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `FK_user_id_accept-users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -129,6 +130,7 @@ CREATE TABLE `requests` (
 
 LOCK TABLES `requests` WRITE;
 /*!40000 ALTER TABLE `requests` DISABLE KEYS */;
+INSERT INTO `requests` VALUES ('SDRQID0002','SDID0001','SDSC0002','Accepted','2023-01-20 05:22:31','2023-01-20 06:58:06',NULL,'SDID0005','SDPY0004','kita rata sa japan 3rd floor'),('SDRQID0003','SDID0001','SDSC0003','Accepted','2023-01-20 06:04:31','2023-01-20 07:04:37',NULL,'SDID0005','SDPY0005','Diri'),('SDRQID0004','SDID0001','SDSC0004','Accepted','2023-01-20 06:11:27','2023-01-20 07:04:38',NULL,'SDID0005','SDPY0006','1'),('SDRQID0005','SDID0001','SDSC0005','Accepted','2023-01-20 06:32:03','2023-01-20 07:04:39',NULL,'SDID0005','SDPY0007','Diri rgd');
 /*!40000 ALTER TABLE `requests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,10 +146,10 @@ CREATE TABLE `service_gcash` (
   `gcash_type` varchar(45) NOT NULL,
   `amount` varchar(45) NOT NULL,
   `phone_number` varchar(45) NOT NULL,
-  `service_code` varchar(45) NOT NULL,
+  `service_code` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`gcash_id`),
   KEY `FK_service_code-gcash_idx` (`service_code`),
-  CONSTRAINT `FK_service_code-gcash` FOREIGN KEY (`service_code`) REFERENCES `services` (`service_code`) ON UPDATE CASCADE
+  CONSTRAINT `FK_service_code-gcash` FOREIGN KEY (`service_code`) REFERENCES `services` (`service_code`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -157,6 +159,7 @@ CREATE TABLE `service_gcash` (
 
 LOCK TABLES `service_gcash` WRITE;
 /*!40000 ALTER TABLE `service_gcash` DISABLE KEYS */;
+INSERT INTO `service_gcash` VALUES ('SDGC0002','','1000','09955925831','SDSC0003'),('SDGC0003','Cash-in','1000','09955925831','SDSC0005');
 /*!40000 ALTER TABLE `service_gcash` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -175,7 +178,7 @@ CREATE TABLE `service_print` (
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`print_id`),
   KEY `FK_service_code-print_idx` (`service_code`),
-  CONSTRAINT `FK_service_code-print` FOREIGN KEY (`service_code`) REFERENCES `services` (`service_code`) ON UPDATE CASCADE
+  CONSTRAINT `FK_service_code-print` FOREIGN KEY (`service_code`) REFERENCES `services` (`service_code`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -185,6 +188,7 @@ CREATE TABLE `service_print` (
 
 LOCK TABLES `service_print` WRITE;
 /*!40000 ALTER TABLE `service_print` DISABLE KEYS */;
+INSERT INTO `service_print` VALUES ('SDPR0001','SDSC0002','Gabriel_Lawrence_Resume.pdf','1','Palihog kog pa print ani kanang colored balag black n white ty'),('SDPR0002','SDSC0004','ITE183_Presentation_guidelines_-_FINAL.docx','1','1');
 /*!40000 ALTER TABLE `service_print` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,6 +212,7 @@ CREATE TABLE `services` (
 
 LOCK TABLES `services` WRITE;
 /*!40000 ALTER TABLE `services` DISABLE KEYS */;
+INSERT INTO `services` VALUES ('SDSC0002','SFPR'),('SDSC0003','SFGC'),('SDSC0004','SFPR'),('SDSC0005','SFGC');
 /*!40000 ALTER TABLE `services` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,7 +247,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('SDID0001','badingka??','Gabriel00!','Gabriel','Lawrence','male','gabbypaylaga1@gmail.com','CCS','BSIT','2019-2130',NULL,NULL),('SDID0002','badingka?','Gabriel00!','Badingka','Badingjd','male','badingka@gmail.com','CCS','BSIT','2019-2222',NULL,NULL);
+INSERT INTO `users` VALUES ('SDID0001','badingka??','Gabriel00!','Gabriel','Lawrence','male','gabbypaylaga1@gmail.com','CCS','BSIT','2019-2130',NULL,'09955925831'),('SDID0002','Badingkajd?','Gabriel00!','Badingnjd','Kaayo','male','badingka@gmail.com','CON','BSN','2019-0004',NULL,'09955925831'),('SDID0003','dimple.bacus','123Dimple123-','Dimple','Bacus','female','trishamaedimple.bacus@g.msuiit.edu.ph','CCS','BSIT','2019-1757',NULL,'09557121652'),('SDID0004','markbrian.macadangdang','Marxist25*','Mark Brian','Macadangdang','male','markbrian.macadangdang@g.msuiit.edu.ph','CCS','BSIT','2019-1812',NULL,'09614834065'),('SDID0005','Andrie','Andrie!123','Andrie','Luceno','male','andrieluceno@gmail.com','COET','BSMET','2018-1222',NULL,NULL),('SDID0006','badingka?','Gabriel00!','Gabriel','Lawrence','Male','gabriellawrence@gmail.com','CCS','BSECT','2019-0078',NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -255,4 +260,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-19  2:58:03
+-- Dump completed on 2023-01-20  7:11:11

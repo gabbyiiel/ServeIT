@@ -1,0 +1,30 @@
+<div class="modal fade in" id="PRQModal">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 500px">
+      <div class="modal-content" style="border: 0">
+        <div class="modal-header">      
+          <h5 class="modal-title">Printing Request</h5>
+          <button
+            type="button"
+            class="btn-close me-2"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            id="close-request-modal"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row m-2 justify-content-center">
+              <img class="print-logo" src={{url_for('static',
+                filename='img/logo/printing_logo.png')}} alt="print_logo">
+            </div>
+            <div class="row">
+              <h5 class="request_id text-center">{{request['request_id']}}</h5>
+            </div>
+            <div class="row">
+              <h6 class="request_loc text-center">{{request['location']}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

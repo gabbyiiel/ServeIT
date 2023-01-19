@@ -394,6 +394,14 @@ h3 {
   opacity: 100%;
   border: 0;
 }
+.btn.btn.delete-request {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+.btn.delete-request img{
+  width: 20px;
+}
 
 @media (max-width: 576px) {
   .dategreeting * {
@@ -450,5 +458,9 @@ h3 {
 
   .gcash-btn {
     font-size: 12px;
+  }
+  .btn.delete-request img{
+    position: relative;
+    top: -2px;
   }
 }

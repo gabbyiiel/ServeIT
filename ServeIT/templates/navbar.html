@@ -1,7 +1,7 @@
-<body>
-  <div class="navbar container-fluid">
-    <header class="d-flex  justify-content-center mx-auto pt-2 pb-2">
-      <ul class="nav nav-pills ">
+<div class="navbar container-fluid">
+  <header class="justify-content-center mx-auto pt-2 pb-2">
+    <div class="row">
+      <ul class="nav nav-pills">
         <li class="nav-item">
           <a href="/" class="nav-link link-light">Home</a>
         </li>
@@ -11,10 +11,17 @@
         <li class="nav-item">
           <a href="/services" class="nav-link link-light">Services</a>
         </li>
-        <li class="nav-item">
-          <a href="/request_feed" class="nav-link link-light">Request Feed</a>
+      </ul>
+    </div>
+    <div class="row justify-content-center">
+      <ul class="nav nav-pills">
+        <li class="nav-item user" style="display: none">
+          <a href="/login" class="nav-link link-light">Login</a>
+        </li>
+        <li class="nav-item user" style="display: none">
+          <a href="/signup" class="nav-link link-light">Sign Up</a>
         </li>
       </ul>
-    </header>
-  </div>
-</body>
+    </div>
+  </header>
+</div>

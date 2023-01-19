@@ -1,0 +1,146 @@
+{% if request['order_status'] == 'Listing' %}
+<div class="row RF-card-requests p-2">
+    <div class="col-5 col-lg-8">
+      {% if request['service_name'] == 'SFPR'%}
+      <div class="row requests-title mt-2">
+        <h4>Printing Request</h4>
+      </div>
+      {% elif request['service_name'] == 'SFGC' %}
+      <div class="row requests-title mt-2">
+        <h4>Gcash Request</h4>
+      </div>
+      {% elif request['service_name'] == 'SFFDS' %}
+      <div class="row requests-title mt-2">
+        <h4>Food Request</h4>
+      </div>
+      {% else %}
+      <div class="row requests-title mt-2">
+        <h5>Hatdog ka?</h5>
+      </div>
+      {% endif %}
+      <div class="row request-info">
+        <h5>{{ request['request_id'] }} - {{ request['location'] }}</h5>
+      </div>
+      <div class="row request-description">
+        <h6>{{ request['description'] }}</h6>
+      </div>
+    </div>
+    {% if request['user_id'] == user['user_id'] %}
+    <div class="col-7 col-lg-4 d-flex justify-content-center align-self-center">
+      {% if request['order_status'] == 'Listing' %}
+      <button type="button" class="btn accept-request" disabled>Listing</button>
+      <form action="{{ url_for('bp_dashboard.remove_request') }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <button
+          type="submit"
+          name="delete"
+          value="{{ request['request_id'] }}"
+          class="btn delete-request mx-3 p-0"
+        >
+        <img src={{url_for('static', filename='img/icons/B_trash.png')}}>
+        </button>
+      </form>
+      {% elif request['order_status'] == 'Accepted' %}
+      <button type="button" class="btn accept-request" disabled>Accepted</button>
+      <form action="{{ url_for('bp_dashboard.remove_request') }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <button
+          type="submit"
+          name="delete"
+          value="{{ request['request_id'] }}"
+          class="btn delete-request mx-3 p-0"
+        >
+        <img src={{url_for('static', filename='img/icons/B_trash.png')}}>
+        </button>
+      </form>
+      {% else %}
+      <button type="button" class="btn accept-request" disabled>Completed</button>
+      {% endif %}
+    </div>
+    {% else %}
+    <div class="col-7 col-lg-4 d-flex justify-content-center align-self-center">
+      <form action="{{ url_for('bp_dashboard.accept_request') }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <button
+          type="submit"
+          name="accept"
+          value="{{ request['request_id'] }}"
+          class="btn accept-request mx-2"
+        >
+          Accept
+        </button>
+        <button
+          type="submit"
+          name="bookmark"
+          value="bookmark"
+          class="btn bookmark-request"
+        >
+          <img src={{url_for('static', filename='img/icons/R_bookmark.png')}}
+          alt="bookmark">
+        </button>
+      </form>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+{% if request['order_status'] == 'Accepted' or request ['order_status'] == 'Completed' %}
+  {% if request['user_id'] == user['user_id'] or request['user_id_accept'] == user['user_id'] %}
+  <div class="row RF-card-requests p-2">
+    <div class="col-5 col-lg-8">
+      {% if request['service_name'] == 'SFPR'%}
+      <div class="row requests-title mt-2">
+        <h4>Printing Request</h4>
+      </div>
+      {% elif request['service_name'] == 'SFGC' %}
+      <div class="row requests-title mt-2">
+        <h4>Gcash Request</h4>
+      </div>
+      {% elif request['service_name'] == 'SFFDS' %}
+      <div class="row requests-title mt-2">
+        <h4>Food Request</h4>
+      </div>
+      {% else %}
+      <div class="row requests-title mt-2">
+        <h5>Hatdog ka?</h5>
+      </div>
+      {% endif %}
+      <div class="row request-info">
+        <h5>{{ request['request_id'] }} - {{ request['location'] }}</h5>
+      </div>
+      <div class="row request-description">
+        <h6>{{ request['description'] }}</h6>
+      </div>
+    </div>
+    <div class="col-7 col-lg-4 d-flex justify-content-center align-self-center">
+      {% if request['order_status'] == 'Listing' %}
+      <form action="{{ url_for('bp_dashboard.remove_request') }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <button
+          type="submit"
+          name="delete"
+          value="{{ request['request_id'] }}"
+          class="btn delete-request mx-3 p-0"
+        >
+        <img src={{url_for('static', filename='img/icons/B_trash.png')}}>
+        </button>
+      </form>
+      {% elif request['order_status'] == 'Accepted' %}
+      <button type="button" class="btn accept-request" disabled>Accepted</button>
+      <form action="{{ url_for('bp_dashboard.remove_request') }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <button
+          type="submit"
+          name="delete"
+          value="{{ request['request_id'] }}"
+          class="btn delete-request mx-3 p-0"
+        >
+        <img src={{url_for('static', filename='img/icons/B_trash.png')}}>
+        </button>
+      </form>
+      {% else %}
+      <button type="button" class="btn accept-request" disabled>Completed</button>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+{% endif %}

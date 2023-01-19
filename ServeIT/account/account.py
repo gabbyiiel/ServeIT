@@ -2,6 +2,7 @@ from flask import render_template, request, flash, redirect, session, url_for
 from . import bp_acc
 from ServeIT.auth.auth import login_required
 from ServeIT.models.dbUtils.UserRepo import UserRepo, College
+from ServeIT.models.dbUtils.ServicesRepo import Services
 from .forms.accountForms import BasicInfoForm, UserInfoForm, SchoolInfoForm
 import cloudinary, cloudinary.uploader
 
@@ -11,11 +12,13 @@ def account():
     title = 'Account'
     userID = session.get('user_id')
     data = UserRepo.get_current_user(userID)
+    accept_request = Services.count_user_accepted_requests(userID)
+    created_request = Services.count_user_requests(userID)
     college = College.get_user_college(data['college'])
     course= College.get_user_course(data['course'])
 
 
-    return render_template("account/account.html", title=title, user=data, colleges=college, courses=course)
+    return render_template("account/account.html", title=title, user=data, colleges=college, courses=course, crequest=created_request, arequest=accept_request)
 
 
 # Upload to Cloudinary

@@ -43,6 +43,15 @@ def accept_request():
             Services.accept_request(request_id, userID)
         return redirect(url_for('bp_dashboard.dashboard'))
     
+@bp_dashboard.route('/dashboard/remove', methods=['POST'])
+@login_required
+def remove_request():
+    if request.method == 'POST':
+        request_id = request.form.get('delete')
+        print(request_id)
+        if request.form.get('delete'):
+            Services.remove_request(request_id)
+        return redirect(url_for('bp_dashboard.dashboard'))
 
 @bp_dashboard.route('/dashboard/add-print', methods=['GET', 'POST'])
 @login_required
@@ -74,11 +83,13 @@ def add_print_request():
                     Services.add_request(userID, order_status, location)
                     if result is not None and result['code'] == -1:
                         flash(result['message'])
+                        print(get_flashed_messages())
                     else:
                         redirect('bp_dashboard.dashboard')
 
-                elif printfile_result and printfile_result['code'] == -1:
+                elif printfile_result and printfile_result['code'] == 0:
                     flash(printfile_result['message'])
+                    print(get_flashed_messages())
             return redirect(url_for('bp_dashboard.dashboard'))
         else:
             flash("You are trying to access a forbidden URL.", "error")
@@ -123,7 +134,11 @@ def add_gcash_request():
                 for error in errors:
                     print(f"Error in field {field}: {error}")
         return redirect(url_for('bp_dashboard.dashboard'))
-    
+
+
+
+
+
 ALLOWED_EXTENSIONS = {'docx', 'pdf', 'pptx'}
 def allowed_file(filename):
     try:
@@ -173,6 +188,21 @@ def upload_file(file_name, bucket, object_name=None):
         return False, print("S3 Not Uploaded")
     return True, print("S3 Uploaded")
     
+#Boto S3 Download File Function
+def download_file(file_name, bucket, object_name=None):
+    # If S3 object_name was not specified, use file_name
+    if object_name is None:
+        object_name = os.path.basename(file_name)
+    
+    # Download the file
+    s3_client = boto3.client('s3')
+    try:
+        response = s3_client.download_file(bucket, object_name, file_name)
+    except ClientError as e:
+        logging.error(e)
+        return False, print("S3 Not Downloaded")
+    return True, print("S3 Downloaded")
+
 
 #Boto S3 Create URL File Function
 def create_presigned_url(bucket_name, object_name, expiration=3600):

@@ -90,6 +90,14 @@
   width: 25px;
   height: auto;
 }
+.btn.btn.delete-request {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+.btn.delete-request img{
+  width: 20px;
+}
 
 @media (max-width: 576px) {
   .TR-info h3,
@@ -102,5 +110,9 @@
   }
   .categories h5 {
     font-size: 12px;
+  }
+  .btn.delete-request img{
+    position: relative;
+    top: -2px;
   }
 }
