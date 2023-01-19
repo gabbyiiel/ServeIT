@@ -15,7 +15,6 @@ from werkzeug.utils import secure_filename
 @bp_dashboard.route('/dashboard', methods=['GET'])
 @login_required
 def dashboard():
-    print(get_flashed_messages())
     rqdata = Services.display_request()
     print(rqdata)
     userID = session.get('user_id')
@@ -61,11 +60,10 @@ def add_print_request():
             if form.printfile.data:
                 printfile_result = allowed_file(form.printfile.data.filename)
                 if printfile_result and printfile_result['code'] == 1:
-                    print(get_flashed_messages())
                     filename = secure_filename(form.printfile.data.filename)
                     form.printfile.data.save(os.path.join(UPLOAD_FOLDER, filename))
                     filepath = os.path.join(UPLOAD_FOLDER, filename)
-
+                
                     if filepath:
                         upload_FileS3(filepath)
                         fileURL = os.path.basename(filepath)
@@ -79,7 +77,7 @@ def add_print_request():
                     else:
                         redirect('bp_dashboard.dashboard')
 
-                elif printfile_result:
+                elif printfile_result and printfile_result['code'] == -1:
                     flash(printfile_result['message'])
             return redirect(url_for('bp_dashboard.dashboard'))
         else:
@@ -112,9 +110,9 @@ def add_gcash_request():
             mop = "COD"
             order_status = "Listing"
             Services.add_service("GC")
+            Services.get_payment(mop)
             result = Services.add_gcash(gcash_type, amount, phone_number)
             Services.add_request(userID, order_status, location)
-            Services.get_payment(mop)
             if result is not None and result['code'] == -1:
                 flash(result['message'])
             else:

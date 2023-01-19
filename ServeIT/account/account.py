@@ -15,7 +15,7 @@ def account():
     course= College.get_user_course(data['course'])
 
 
-    return render_template("account/account.html", title=title, users=data, colleges=college, courses=course)
+    return render_template("account/account.html", title=title, user=data, colleges=college, courses=course)
 
 
 # Upload to Cloudinary
@@ -60,5 +60,6 @@ def settings():
         college = request.form.get('college')
         course = request.form.get('course')
         UserRepo.Updateschoolinfo(idnumber, college, course, userID)
+        return redirect(url_for('bp_acc.settings'))
 
-    return render_template("account/settings.html", title=title, users=data, sform=sform, bform=bform, uform=uform, colleges=ucollege, collegelist=collegelist, courselist=courselist, courses=ucourse)
+    return render_template("account/settings.html", title=title, user=data, sform=sform, bform=bform, uform=uform, colleges=ucollege, collegelist=collegelist, courselist=courselist, courses=ucourse)

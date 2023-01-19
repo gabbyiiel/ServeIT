@@ -43,6 +43,5 @@ def create_app(test_app=None):
     app.register_blueprint(bp_dashboard)
     app.register_blueprint(bp_acc)
     app.register_blueprint(bp_reqfeed)
-    # run_with_ngrok(app)
     return app
     

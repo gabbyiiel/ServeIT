@@ -21,13 +21,14 @@
       <div class="modal-body">
         <div class="container">
           <div class="row gcash-modal">
-            <div class="col-7 d-flex justify-content-center align-self-center">
+            <div
+              class="col-lg-7 col-sm d-flex justify-content-center align-self-center"
+            >
               <img class="gcash-logo p-2" src={{url_for('static',
               filename='img/logo/gcash_logo.png')}} alt="gcash_logo">
             </div>
             <div
-              class="col-4 gcash-selection mt-2 justify-content-center align-self-center"
-              id="gcash-option"
+              class="col-lg-4 col-sm gcash-selection mt-2 justify-content-center align-self-center"
             >
               <form
                 action="{{ url_for('bp_dashboard.add_gcash_request') }}"
@@ -36,7 +37,7 @@
               >
                 {{ gform.hidden_tag() }}
                 <div class="row m-2 gcash-header p-2">
-                  <div class="col">
+                  <div class="col d-flex justify-content-center">
                     <button
                       type="button"
                       class="btn gcash-btn"
@@ -47,7 +48,7 @@
                       Cash-in
                     </button>
                   </div>
-                  <div class="col">
+                  <div class="col d-flex justify-content-center">
                     <button
                       type="button"
                       class="btn gcash-btn"
@@ -72,7 +73,6 @@
                   placeholder='Location') }}
                 </div>
                 <div class="row paymentinfo mt-3">
-                  <div class="row">
                     <p class="payment-text mx-auto text-center my-2">
                       Total payment may vary on the requested service
                     </p>
@@ -88,7 +88,7 @@
                         name="selectedValue"
                       />
                       <button class="btn d-flex mx-auto p-2" id="submit">
-                        {{gform.submit(class_='btn', value='Submit Request') }}
+                        {{gform.submit(class_='btn p-0', value='Submit Request') }}
                       </button>
                     </div>
                   </div>

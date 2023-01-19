@@ -1,0 +1,106 @@
+.card.TR-card {
+  border-radius: 15px;
+  background-color: #fffdf9;
+  box-shadow: rgba(0, 0, 0, 0.175) 0px 3px 5px;
+}
+.card.TR-card a {
+  text-decoration: none;
+}
+
+.TR-number h3 {
+  font-family: "Mitr", sans-serif;
+  font-style: normal;
+  color: #6d0a03;
+  font-size: 35px;
+  text-shadow: rgba(0, 0, 0, 0.253) 0px 2px 2px;
+}
+
+.TR-info h3 {
+  font-family: "Mitr", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  color: #424242;
+}
+
+.RF-card-header h3 {
+  font-family: "Mitr";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 25px;
+  color: #6d0a03;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.253);
+}
+.card.RF-card {
+  background-color: #fffdf9;
+  border: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.089);
+  border-radius: 15px;
+}
+.categories h5 {
+  font-family: "Mitr";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+}
+.categories {
+  border-bottom: 1px solid #424242;
+}
+.RF-card-requests:hover {
+  background-color: #fdf5e6;
+  transition: ease 0.5s;
+}
+.requests-title h4 {
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  color: #424242;
+}
+
+.request-info h5 {
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  color: #424242;
+}
+
+.btn.accept-request:disabled {
+  background-color: #6d0a03;
+  border-radius: 10px;
+  color: #face7f;
+  opacity: 100%;
+  border: 0;
+}
+
+.accept-request,
+.later-request {
+  background: #6d0a03;
+  color: #face7f;
+}
+.btn.bookmark-request {
+  background-color: #fffdf9;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 25px;
+  width: 50px;
+  height: 50px;
+}
+.btn.bookmark-request img {
+  width: 25px;
+  height: auto;
+}
+
+@media (max-width: 576px) {
+  .TR-info h3,
+  .TR-number h3 {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+  .card.RF-card h3 {
+    font-size: 1rem;
+  }
+  .categories h5 {
+    font-size: 12px;
+  }
+}

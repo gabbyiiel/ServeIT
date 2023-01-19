@@ -23,47 +23,32 @@
     {% include 'navbar.html' %} {% block content %}
     {% endblock %}
 
-    <div class="container">
-      <!-- printing service -->
-      <div class="row services p-5">
-        <div class="col-6 d-flex">
-          <img class="services-img" src={{url_for('static', filename='img/logo/printing_logo.png')}}
-          alt="Printing service" />
+    <div id="carouselExampleIndicators" class="carousel slide">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="..." class="d-block w-100" alt="...">
         </div>
-        <div class="col-6 services-text">
-          <h2>Printing Services</h2>
-          <p>Allows users to place their print order online.</p>
+        <div class="carousel-item">
+          <img src="..." class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="..." class="d-block w-100" alt="...">
         </div>
       </div>
-        <div class="row services p-5">
-          <div class="col-6 d-flex">
-            <img class="services-img" src={{url_for('static', filename='img/logo/fds_logo.png')}}
-            alt="Food Delivery service" />
-          </div>
-          <div class="col-6 services-text">
-            <h2>Food Delivery Services</h2>
-            <p>Allows users to order their food of choice in MSU-IIT cafeteria.</p>
-          </div>
-          <div class="row services p-5">
-            <div class="col-6 d-flex">
-              <img class="services-img" src={{url_for('static', filename='img/logo/gcash_logo.png')}}
-              alt="Gcash service" />
-            </div>
-            <div class="col-6 services-text">
-              <h2>Gcash Services</h2>
-              <p>Allows users to place their GCash cash-in/cash-out transaction order online.</p>
-            </div>
-            <div class="row services p-5">
-              <div class="col-6 d-flex">
-                <img class="services-img" src={{url_for('static', filename='img/logo/ta_logo.png')}}
-                alt="Tutorial Appointment" />
-              </div>
-              <div class="col-6 services-text">
-                <h2>Tutorial Appointment</h2>
-                <p>Allows users to set tutorial appointment from the Guidance Office.</p>
-              </div>
-      </div>
-  
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
       <!-- LOGO LEFT -->
       <a class="logo-left-container p-2" href="/" style="z-index: 99999" >
         <img class="logo-left-img" src={{url_for('static', filename='img/logo/SDW_logo.png')}}></a>

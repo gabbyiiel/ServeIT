@@ -123,3 +123,20 @@ body {
 #flash-message {
   color: #131313;
 }
+@media (max-width: 576px) {
+  .whitelogo {
+    width: 300px;
+    height: auto;
+  }
+  .login_form_input {
+    width: 300px;
+    height: 40px;
+  }
+  .login_form_button {
+    width: 300px;
+    height: 40px;
+  }
+  .signup_text {
+    font-size: 15px;
+  }
+}

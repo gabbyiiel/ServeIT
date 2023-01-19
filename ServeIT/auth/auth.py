@@ -72,7 +72,7 @@ def sign_up():
         course = request.form.get('course')
         idnumber = form.idnumber.data
         password = form.password.data
-        gender = form.gender.data
+        gender = request.form.get('gender')
         username = form.username.data
         # call signup function and check if it returns an error
         result = UserRepo.signup(username, idnumber, fname, lname, email, college, course, password, gender)
@@ -82,6 +82,8 @@ def sign_up():
             form.fname.data = fname
             form.lname.data = lname
             form.email.data = email
+            college = request.form.get('college')
+            course = request.form.get('course')
             form.idnumber.data = idnumber
             form.password.data = password
             form.gender.data = gender

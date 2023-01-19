@@ -61,3 +61,36 @@ label {
   color: #6d0a03;
   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.212);
 }
+.user-button {
+  align-self: center;
+}
+
+@media (max-width: 576px) {
+  .user-header {
+    justify-content: center;
+  }
+  .row.user-name,
+  .row.user-college {
+    justify-content: center;
+    text-align: center;
+  }
+  .row.user-course {
+    text-align: center;
+  }
+  .user-button {
+    margin-top: 10px !important;
+    display: flex;
+    justify-content: center;
+  }
+  .card.user-info {
+    margin-top: 10px;
+  }
+  .user-information h6,
+  .user-complete.name h6,
+  .user-info h6,
+  .user-info-t p,
+  .student-complete-name h6,
+  .student-info h6 {
+    font-weight: 400 !important;
+  }
+}

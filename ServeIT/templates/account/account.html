@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link rel="icon" href={{url_for('static',
+    filename='img/logo/SDB_icon.png')}}>
     <title>{{ title }}</title>
     <meta charset="UTF-8" />
 
@@ -39,30 +41,14 @@
     <!-- DASHBOARD -->
     <div class="dashboard-section">
       <!-- HEADER / NAVBAR -->
-      <header
-        class="navbar-header d-flex flex-wrap justify-content-center pt-2 pb-2"
-      >
-        <ul class="nav nav-pills me-md-auto">
-          <li class="nav-item ms-3 mt-1">
-            <img class="icons" src={{url_for('static',
-            filename='img/icons/W_menu.png')}} id="btn"/>
-          </li>
-          <li class="nav-item">
-            <a href="/account" class="nav-link">Account</a>
-          </li>
-        </ul>
-
-        <ul class="nav nav-pills me-5">
-          <li class="nav-item">
-            <a href="/about" class="nav-link link-light">SEARCH BOX</a>
-          </li>
-        </ul>
-      </header>
+      {% include 'usernavbar.html' %}
       <!-- MAIN BODY -->
       <div class="container mt-4">
         <div class="card user-profile-header p-3" style="border: none">
           <div class="row">
-            <div class="col-2 d-flex align-self-center justify-content-center">
+            <div
+              class="col-12 col-lg-2 d-flex align-self-center justify-content-center"
+            >
               <a
                 data-bs-toggle="modal"
                 data-bs-target="#PhotoModal"
@@ -72,21 +58,21 @@
                 <img class="edit-pic-icon" src={{url_for('static',
                 filename='img/icons/B_edit.png')}} alt="tr-icon">
               </a>
-              {% if users['userImg'] is none %}
+              {% if user['userImg'] is none %}
               <img
                 class="avatar"
-                src="https://avatars.dicebear.com/api/avataaars/{{users['fname']}}{{users['lname']}}.svg?size=100&style=circle"
+                src="https://avatars.dicebear.com/api/avataaars/{{user['fname']}}{{user['lname']}}.svg?size=100&style=circle"
               />
               {% else %}
-              <img class="avatar" src="{{users['userImg']}}" />
+              <img class="avatar" src="{{user['userImg']}}" />
               {% endif %}
             </div>
-            <div class="col-8 align-self-center">
+            <div class="col-12 col-lg-8 align-self-center user-header">
               <div class="row user-name">
-                {{ users['fname'] }} {{users['lname']}}
+                {{ user['fname'] }} {{user['lname']}}
               </div>
               <div class="row user-college">{{ colleges['collegeName'] }}</div>
-              {% if users['course'] is none %}
+              {% if user['course'] is none %}
               <div class="row user-course">
                 <a
                   href="/account/settings"
@@ -102,7 +88,7 @@
               </div>
               {% endif %}
             </div>
-            <div class="col-2 align-self-center">
+            <div class="col-12 col-lg-2 user-button">
               <a
                 class="btn profile-setting-button"
                 href="/account/settings"
@@ -113,7 +99,7 @@
           </div>
         </div>
         <div class="row my-3">
-          <div class="col-3">
+          <div class="col-12 col-lg-3">
             <div class="card user-stats p-2" style="border: none">
               <div class="card-body">
                 <div class="row">
@@ -139,51 +125,47 @@
               </div>
             </div>
           </div>
-          <div class="col-9">
+          <div class="col-12 col-lg-9">
             <div class="card user-info p-2" style="border: none">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-6">
+                  <div class="col-12 col-lg-6">
                     <div class="row">
                       <h4>Basic Information</h4>
                     </div>
                     <div class="row user-complete-name m-1">
                       <label class="user-cname-label">Full Name</label>
-                      <div class="user-info-t">
-                        {{ users['fname'] }} {{ users['lname'] }}
-                      </div>
+                      <h6 class="user-info-t">
+                        {{ user['fname'] }} {{ user['lname'] }}
+                      </h6>
                     </div>
                     <div class="row user-info m-1">
                       <label class="user-cnum-label">Contact Number</label>
-                      {% if users['contact_number'] is none %}
-                      <div class="user-info-t">
+                      {% if user['contact_number'] is none %}
+                      <h6 class="user-info-t">
                         <a
                           href="/account/settings"
                           style="text-decoration: none; color: #6d0a03"
                         >
                           <p>Add Contact Number</p>
                         </a>
-                      </div>
+                      </h6>
                       {% else %}
-                      <div class="user-info-t">
-                        {{ users['contact_number'] }}
-                      </div>
+                      <h6 class="user-info-t">{{ user['contact_number'] }}</h6>
                       {% endif %}
                     </div>
                   </div>
-                  <div class="col-6">
+                  <div class="col-12 col-lg-6">
                     <div class="row">
                       <h4>User Information</h4>
                     </div>
-                    <div class="row user-complete-name m-1">
-                      <label class="user-cname-label">Full Name</label>
-                      <div class="user-info-t">
-                        {{ users['fname'] }} {{ users['lname'] }}
-                      </div>
-                    </div>
                     <div class="row user-sdid m-1">
                       <label class="user-cname-label">User ID</label>
-                      <div class="user-info-t">{{ users['user_id'] }}</div>
+                      <h6 class="user-info-t">{{ user['user_id'] }}</h6>
+                    </div>
+                    <div class="row user-information m-1">
+                      <label class="user-cname-label">Username</label>
+                      <h6 class="user-info-t">{{ user['username'] }}</h6>
                     </div>
                   </div>
                 </div>
@@ -198,28 +180,28 @@
                     </div>
                     <div class="row student-complete-name m-1">
                       <label class="student-idnumber-label">ID Number</label>
-                      <div class="student-idnum-t">{{ users['idnumber'] }}</div>
+                      <h6 class="student-idnum-t">{{ user['idnumber'] }}</h6>
                     </div>
                     <div class="row school-info m-1">
                       <label class="school-cnum-label">College</label>
                       <div class="school-info-t">
-                        <p class="p-0 m-0">{{colleges['collegeName']}}</p>
+                        <h6 class="p-0 m-0">{{colleges['collegeName']}}</h6>
                       </div>
                     </div>
                     <div class="row school-info m-1">
                       <label class="school-cnum-label">Course</label>
-                      {% if users['course'] is none%}
+                      {% if user['course'] is none%}
                       <div class="school-info-t">
                         <a
                           href="/account/settings"
                           style="text-decoration: none; color: #6d0a03"
                           class="p-0"
                         >
-                          <p class="p-0 m-0">Add Course</p>
+                          <h6 class="p-0 m-0">Add Course</h6>
                         </a>
                         {% else %}
                         <div class="school-info-t">
-                          <p>{{ courses['courseName'] }}</p>
+                          <h6>{{ courses['courseName'] }}</h6>
                         </div>
                         {% endif %}
                       </div>
@@ -236,4 +218,18 @@
   </body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Script For Sidebar -->
+  <script defer>
+    let sidebar = document.querySelector(".sidebar");
+    let closeBtn = document.querySelector("#btn");
+    let returnBtn = document.querySelector("#returnbtn");
+    let dashboard = document.querySelector(".dashboard-section");
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+      sidebar.style.display = "block";
+    });
+    returnBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+      sidebar.style.display = "none";
+    });
+  </script>
 </html>

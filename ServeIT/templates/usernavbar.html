@@ -1,5 +1,5 @@
 <header class="navbar-header d-flex flex-wrap justify-content-center pt-2 pb-2">
-  <ul class="nav nav-pills me-md-auto">
+  <ul class="nav nav-pills align-self-center me-md-auto">
     <li class="nav-item ms-3 mt-1">
       <img class="icons" src={{url_for('static',
       filename='img/icons/W_menu.png')}} id="btn"/>
@@ -11,7 +11,12 @@
 
   <ul class="nav nav-pills me-5">
     <li class="nav-item">
-      <a href="/about" class="nav-link link-light">SEARCH BOX</a>
+      <a href="/account" class="nav-link link-light">
+        <img
+          class="avatar"
+          src="https://avatars.dicebear.com/api/avataaars/{{user['fname']}}{{user['lname']}}.svg?size=35&style=circle"
+        />
+      </a>
     </li>
   </ul>
 </header>

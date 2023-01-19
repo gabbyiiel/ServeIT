@@ -1,0 +1,85 @@
+<div class="modal fade" id="TA">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 950px">
+    <div class="modal-content" style="border: 0">
+      <div class="modal-header">
+        <a onclick="returnCreateModal('#TA')" style="cursor: pointer">
+          <img class="back-icon me-3 " src={{url_for('static',
+          filename='img/icons/Y_back.png')}} alt="return-icon">
+        </a>
+        <h5 class="modal-title mb-0">Tutorial Appointment</h5>
+
+        <button
+          type="button"
+          class="btn-close me-2"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row ta-modal">
+            <div class="col-7 d-flex justify-content-center align-self-center">
+              <img class="ta-logo p-2" src={{url_for('static',
+              filename='img/logo/ta_logo.png')}} alt="ta_logo">
+            </div>
+            <div
+              class="col-4 ta-form mt-2 justify-content-center align-self-center"
+            >
+              <form>
+                <div class="form-group">
+                  <label for="appointmentDate">Appointment Date</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="appointmentDate"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="appointmentTime">Appointment Time</label>
+                  <div
+                    class="btn-group"
+                    role="group"
+                    aria-label="Appointment Time"
+                  >
+                    <button
+                      type="button"
+                      class="btn btn-secondary btn-time"
+                      id="time1"
+                      value="9:00 AM"
+                    >
+                      9:00 AM
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary btn-time"
+                      id="time2"
+                      value="10:00 AM"
+                    >
+                      10:00 AM
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary btn-time"
+                      id="time3"
+                      value="11:00 AM"
+                    >
+                      11:00 AM
+                    </button>
+                    <!-- Add more buttons as needed -->
+                  </div>
+                </div>
+                <input
+                  type="hidden"
+                  id="appointmentTime"
+                  name="appointmentTime"
+                  value=""
+                />
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

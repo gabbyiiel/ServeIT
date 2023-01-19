@@ -56,7 +56,7 @@
   font-family: "Jost";
   font-size: 20px;
   font-weight: 700;
-  color: #FFCE85;
+  color: #ffce85;
   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.35);
   padding: 10px;
   text-decoration: none;
@@ -64,10 +64,9 @@
 
 .logo-right-text:hover {
   color: #fae5c5;
-
 }
 .navbar {
-  background-color: #6D0A03;
+  background-color: #6d0a03;
 }
 
 .nav-item a {
@@ -79,12 +78,11 @@
 }
 
 .nav-item a:hover {
-  color: #FFCE85;
+  color: #ffce85;
 }
 
 .container {
   background-image: url("/static/img/backgrounds/patternbg.png");
-
 }
 
 .services-img {
@@ -96,12 +94,12 @@
   font-family: "Mitr";
   font-size: 40px;
   font-weight: 600;
-  color: #6D0A03;
+  color: #6d0a03;
   text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.services-text p{
-  font-family: 'Lexend Deca';
+.services-text p {
+  font-family: "Lexend Deca";
   font-size: 20px;
   color: #424242;
   text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
@@ -156,4 +154,19 @@
   font-weight: 500;
   text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   margin: 0;
+}
+
+@media (max-width: 576px) {
+  .about-text h1 {
+    font-size: 35px;
+  }
+  .logo-left-container {
+    display: none;
+  }
+  .logo-right-container {
+    display: none;
+  }
+  .os-text p {
+    font-size: 10px;
+  }
 }

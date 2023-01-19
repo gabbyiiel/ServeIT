@@ -31,7 +31,7 @@
         <div class="card-body p5 text-white">
           <div class="signupform">
             <!-- row for close button and create account text -->
-            <div class="row">
+            <div class="row mb-4 ">
               <div class="col-1">
                 <a href="login">
                   <button
@@ -43,7 +43,7 @@
                 </a>
               </div>
               <div class="col">
-                <h3 class="mb-5">Create your account</h2>
+                <h3 class="m-0">Create your account</h2>
               </div>
             </div>
             <!-- form -->
@@ -51,25 +51,25 @@
               {{ form.csrf_token }}
               <!-- first and last name input-->
               <div class="row">
-                <div class="col-12 col-md-6 mb-2">
+                <div class="col-12 col-md-6 mb-2 d-flex justify-content-center ">
                   {{ form.fname(class_='form-control', placeholder='First Name')}}
                 </div>
-                <div class="col-md-6 mb-2">
+                <div class="col-md-6 mb-2 d-flex justify-content-center">
                   {{ form.lname(class_='form-control', placeholder='Last Name')}}
                 </div>
               </div>
               <!-- email input-->
               <div class="row">
-                <div class="col mb-2">
+                <div class="col mb-2 d-flex justify-content-center">
                   {{ form.email(class_='form-control', placeholder='Email')}}
                 </div>
               </div>
               <!-- id number, college, course input-->
               <div class="row">
-                <div class="col-12 col-md-4 mb-2">
+                <div class="col-12 col-md-4 mb-2 d-flex justify-content-center">
                   {{ form.idnumber(class_='form-control', placeholder='Id Number')}}
                 </div>
-                <div class="col-12 col-md-4 mb-2">
+                <div class="col-12 col-md-4 mb-2 d-flex justify-content-center">
                   <select id="college" name="college" class="form-control selectpicker" required>
                     <option selected disabled value="">Select College</option>
                     {% for college in collegelist %}
@@ -77,7 +77,7 @@
                     {% endfor %}
                   </select>
                 </div>
-                <div class="col-12 col-md-4 mb-2">
+                <div class="col-12 col-md-4 mb-2 d-flex justify-content-center">
                   <select id="course" name="course" class="form-control selectpicker" required>
                     <option selected disabled value="">Select Course</option>
                   </select>
@@ -85,37 +85,41 @@
               </div>
               <!-- username input-->
               <div class="row">
-                <div class="col mb-2">
+                <div class="col mb-2 d-flex justify-content-center">
                   {{ form.username(class_='form-control', placeholder='Username')}}
                 </div>
               </div>
               <!-- password input-->
               <div class="row">
-                <div class="col mb-2">
+                <div class="col mb-2 d-flex justify-content-center">
                   {{ form.password(class_='form-control', placeholder='Password')}}
                 </div>
               </div>
               <!-- gender input -->
-              <!-- PAKI FIX DAYON ANI KAY NAKATOK CHATGPT RA SULBARA -->
               <div class="row">
-                <div class="col">
-                  {{ form.gender(class_='form-check') }}
+                <div class="col d-flex justify-content-center">
+                  <input class="form-check-input" type="radio" name="gender" value="Male" id="male" required>
+                  <label class="form-check-label ms-2" for="male">Male</label>
                 </div>
+                <div class="col d-flex justify-content-center">
+                  <input class="form-check-input" type="radio" name="gender" value="Female" required>
+                  <label class="form-check-label ms-2" for="female">Female</label>
+
               </div>
               <!-- signup text -->
               <div class="row">
                 <div class="SignupText">
-                  <p class="agreement_text">
+                  <p class="agreement_text text-center" style="margin-left: 30px; margin-top:10px">
                     By clicking Sign Up, you agree to our
-                    <span class="boldtext">Terms</span>,<span class="boldtext"
-                      >Privacy Policy</span
+                    <span class="boldtext">Terms</span>, <span class="boldtext"
+                      >Privacy Policy </span
                     >
                     and <span class="boldtext">Policy</span>.
                   </p>
                 </div>
               </div>
               <!-- signup button -->
-              <div class="row justify-content-center">
+              <div class="d-flex justify-content-center">
                 {{ form.submit(class_="btn") }}
                 
               </div>

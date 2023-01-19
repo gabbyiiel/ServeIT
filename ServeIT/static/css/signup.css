@@ -66,7 +66,9 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.308);
   border-radius: 5px;
 }
-
+.boldtext {
+  font-weight: bold;
+}
 .btn,
 .btn-primary {
   font-weight: 700;
@@ -124,4 +126,20 @@ li {
 
 #flash-message {
   color: #131313;
+}
+
+@media (max-width: 576px) {
+  .form-control {
+    width: 278px;
+  }
+  .agreement_text {
+    font-size: 12px;
+  }
+  .form-check {
+    font-size: 12px;
+  }
+  .btn {
+    width: 278px;
+    height: 35px;
+  }
 }

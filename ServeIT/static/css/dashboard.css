@@ -58,6 +58,8 @@
 
 .CR-info h3 {
   font-family: "Mitr", sans-serif;
+  font-size: 24px;
+  margin: 0;
 }
 
 .TR-icon img,
@@ -76,8 +78,6 @@
   border-radius: 15px;
 }
 h3 {
-  font-size: 24px;
-  margin: 0;
 }
 .card.CR-card h3 {
   color: #face7f;
@@ -88,7 +88,8 @@ h3 {
   height: auto;
 }
 .print-logo,
-.gcash-logo {
+.gcash-logo,
+.ta-logo {
   width: 200px;
   height: auto;
 }
@@ -385,4 +386,69 @@ h3 {
 .btn.bookmark-request img {
   width: 25px;
   height: auto;
+}
+.btn.accept-request:disabled {
+  background-color: #6d0a03;
+  border-radius: 10px;
+  color: #face7f;
+  opacity: 100%;
+  border: 0;
+}
+
+@media (max-width: 576px) {
+  .dategreeting * {
+    font-size: 1rem;
+  }
+  #sd_icon3d {
+    width: 100px;
+    height: auto;
+  }
+  .TR-icon img,
+  .CR-icon img {
+    width: 25px;
+    height: auto;
+  }
+
+  .TR-info h3,
+  .TR-number h3 {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+
+  .CR-info h3 {
+    font-size: 12px;
+  }
+  .card.RF-card h3 {
+    font-size: 1rem;
+  }
+  .categories h5 {
+    font-size: 12px;
+  }
+  .user-card {
+    display: none;
+  }
+  .modal-title {
+    font-size: 1rem;
+  }
+  .m_text h6 {
+    font-size: 10px;
+  }
+  .form-control {
+    font-size: 12px;
+  }
+  .print-logo,
+  .gcash-logo,
+  .ta-logo {
+    width: 140px;
+  }
+  .form-check-label {
+    font-size: 12px;
+  }
+  .payment-text {
+    font-size: 12px;
+  }
+
+  .gcash-btn {
+    font-size: 12px;
+  }
 }

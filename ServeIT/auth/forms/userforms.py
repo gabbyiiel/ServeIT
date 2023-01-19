@@ -14,5 +14,4 @@ class SignupForm(FlaskForm):
     idnumber = StringField('Id Number', [validators.Length(min=9, max=9), validators.Regexp(r'^\d{4}-\d{4}$', message='ID number must be in integer ex 2000-0001'), validators.DataRequired()])
     password = PasswordField('Password', validators=[validators.Length(min=8)])
     username = StringField('Username',validators=[validators.Length(min=4, max=25)])
-    gender = RadioField('Gender', choices=[('male', 'Male'), ('female', 'Female')], render_kw={'class': 'form-check-input'}) 
     submit = SubmitField('Sign Up')

@@ -1,8 +1,20 @@
 <link rel="stylesheet" href={{url_for('static', filename='css/sidebar.css')}} />
 <div class="sidebar">
   <div class="logo-details">
-    <img class="sb-sd-logo closed" id="logo" src={{url_for('static',
-    filename='img/logo/SDB_icon.png')}}>
+    <div class="row">
+      <div class="col-lg-12 col-sm-8">
+        <img class="sb-sd-logo closed" id="logo" src={{url_for('static',
+        filename='img/logo/SDB_icon.png')}}>
+      </div>
+      <div
+        class="col-sm-4"
+        id="returnbtn"
+        style="display: none; position: absolute"
+      >
+        <img class="sb-sd-logo closed" style="float: right;" id="logo"
+        src={{url_for('static', filename='img/icons/B_return.png')}}>
+      </div>
+    </div>
   </div>
   <ul class="nav-list p-0">
     <li>
